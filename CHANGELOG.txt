@@ -1,0 +1,19 @@
+DrThai Health 2.0.0 — 01/08/2026
+================================
+
+- Thiết kế lại toàn bộ theo phong cách kem ấm, xanh đậm và vàng nhấn của
+  gastrocare-landing-mockup.html.
+- Thay Header, Hero, dải giá trị, chuyên môn, giới thiệu, quy trình, tin tức,
+  lời kêu gọi liên hệ và Footer.
+- Bổ sung trang /tin-tuc/ động theo Chuyên mục và Thẻ của WordPress.
+- Bổ sung trang /lien-he/ và /dat-lich/ với biểu mẫu yêu cầu gọi lại.
+- Bổ sung khu vực quản trị riêng Yêu cầu gọi lại, chỉ Administrator truy cập.
+- Bổ sung Nonce, Honeypot, kiểm tra dữ liệu và giới hạn tần suất gửi form.
+- Tự tạo trang và sáu chuyên mục còn thiếu khi kích hoạt; không ghi đè nội dung.
+- Nâng cấp Responsive Design cho desktop, tablet và mobile.
+- Không dùng thư viện JavaScript, font, ảnh hoặc dịch vụ bên ngoài.
+
+DrThai Health 1.0.0
+===================
+
+- Phiên bản Block Theme ban đầu với trang chủ, mẫu bài viết và trang lưu trữ.

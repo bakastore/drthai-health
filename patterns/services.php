@@ -1,0 +1,38 @@
+<?php
+/**
+ * Title: Chuyên môn và dịch vụ
+ * Slug: drthai-health/services
+ * Categories: drthai-health, services
+ * Description: Sáu nhóm nội dung chuyên môn tiêu hóa.
+ * Viewport Width: 1200
+ */
+?>
+<!-- wp:group {"align":"full","backgroundColor":"white","className":"drthai-section","style":{"spacing":{"padding":{"top":"var:preset|spacing|70","bottom":"var:preset|spacing|70"}}},"layout":{"type":"constrained"}} -->
+<div class="wp-block-group alignfull drthai-section has-white-background-color has-background" style="padding-top:var(--wp--preset--spacing--70);padding-bottom:var(--wp--preset--spacing--70)">
+	<!-- wp:group {"align":"wide","layout":{"type":"constrained"}} -->
+	<div class="wp-block-group alignwide">
+		<!-- wp:paragraph {"align":"center","textColor":"primary","className":"drthai-eyebrow"} --><p class="has-text-align-center drthai-eyebrow has-primary-color has-text-color">CHUYÊN MÔN VÀ DỊCH VỤ</p><!-- /wp:paragraph -->
+		<!-- wp:heading {"textAlign":"center","fontSize":"x-large"} --><h2 class="wp-block-heading has-text-align-center has-x-large-font-size">Đồng hành cùng hệ tiêu hóa của bạn</h2><!-- /wp:heading -->
+		<!-- wp:paragraph {"align":"center","textColor":"ink-soft"} --><p class="has-text-align-center has-ink-soft-color has-text-color">Các nội dung dưới đây đang ở trạng thái dự kiến và cần bác sĩ xác nhận phạm vi trước khi công khai.</p><!-- /wp:paragraph -->
+
+		<!-- wp:columns {"style":{"spacing":{"margin":{"top":"2.5rem"},"blockGap":{"left":"1.2rem"}}}} -->
+		<div class="wp-block-columns" style="margin-top:2.5rem">
+			<!-- wp:column --><div class="wp-block-column"><!-- wp:group {"className":"drthai-service-card","style":{"spacing":{"padding":{"top":"1.6rem","right":"1.6rem","bottom":"1.6rem","left":"1.6rem"}}},"layout":{"type":"constrained"}} --><div class="wp-block-group drthai-service-card" style="padding-top:1.6rem;padding-right:1.6rem;padding-bottom:1.6rem;padding-left:1.6rem"><!-- wp:paragraph {"className":"drthai-service-icon"} --><p class="drthai-service-icon">01</p><!-- /wp:paragraph --><!-- wp:heading {"level":3,"fontSize":"large"} --><h3 class="wp-block-heading has-large-font-size">Khám và tư vấn tiêu hóa</h3><!-- /wp:heading --><!-- wp:paragraph {"textColor":"ink-soft","fontSize":"small"} --><p class="has-ink-soft-color has-text-color has-small-font-size">Đánh giá triệu chứng và định hướng kiểm tra, theo dõi phù hợp.</p><!-- /wp:paragraph --></div><!-- /wp:group --></div><!-- /wp:column -->
+			<!-- wp:column --><div class="wp-block-column"><!-- wp:group {"className":"drthai-service-card","style":{"spacing":{"padding":{"top":"1.6rem","right":"1.6rem","bottom":"1.6rem","left":"1.6rem"}}},"layout":{"type":"constrained"}} --><div class="wp-block-group drthai-service-card" style="padding-top:1.6rem;padding-right:1.6rem;padding-bottom:1.6rem;padding-left:1.6rem"><!-- wp:paragraph {"className":"drthai-service-icon"} --><p class="drthai-service-icon">02</p><!-- /wp:paragraph --><!-- wp:heading {"level":3,"fontSize":"large"} --><h3 class="wp-block-heading has-large-font-size">Dạ dày – thực quản</h3><!-- /wp:heading --><!-- wp:paragraph {"textColor":"ink-soft","fontSize":"small"} --><p class="has-ink-soft-color has-text-color has-small-font-size">Thông tin về trào ngược, viêm dạ dày và các vấn đề thường gặp.</p><!-- /wp:paragraph --></div><!-- /wp:group --></div><!-- /wp:column -->
+			<!-- wp:column --><div class="wp-block-column"><!-- wp:group {"className":"drthai-service-card","style":{"spacing":{"padding":{"top":"1.6rem","right":"1.6rem","bottom":"1.6rem","left":"1.6rem"}}},"layout":{"type":"constrained"}} --><div class="wp-block-group drthai-service-card" style="padding-top:1.6rem;padding-right:1.6rem;padding-bottom:1.6rem;padding-left:1.6rem"><!-- wp:paragraph {"className":"drthai-service-icon"} --><p class="drthai-service-icon">03</p><!-- /wp:paragraph --><!-- wp:heading {"level":3,"fontSize":"large"} --><h3 class="wp-block-heading has-large-font-size">Đại tràng – trực tràng</h3><!-- /wp:heading --><!-- wp:paragraph {"textColor":"ink-soft","fontSize":"small"} --><p class="has-ink-soft-color has-text-color has-small-font-size">Tư vấn các rối loạn đại tiện và bệnh lý đại trực tràng thường gặp.</p><!-- /wp:paragraph --></div><!-- /wp:group --></div><!-- /wp:column -->
+		</div>
+		<!-- /wp:columns -->
+
+		<!-- wp:columns {"style":{"spacing":{"margin":{"top":"1.2rem"},"blockGap":{"left":"1.2rem"}}}} -->
+		<div class="wp-block-columns" style="margin-top:1.2rem">
+			<!-- wp:column --><div class="wp-block-column"><!-- wp:group {"className":"drthai-service-card","style":{"spacing":{"padding":{"top":"1.6rem","right":"1.6rem","bottom":"1.6rem","left":"1.6rem"}}},"layout":{"type":"constrained"}} --><div class="wp-block-group drthai-service-card" style="padding-top:1.6rem;padding-right:1.6rem;padding-bottom:1.6rem;padding-left:1.6rem"><!-- wp:paragraph {"className":"drthai-service-icon"} --><p class="drthai-service-icon">04</p><!-- /wp:paragraph --><!-- wp:heading {"level":3,"fontSize":"large"} --><h3 class="wp-block-heading has-large-font-size">Gan – mật – tụy</h3><!-- /wp:heading --><!-- wp:paragraph {"textColor":"ink-soft","fontSize":"small"} --><p class="has-ink-soft-color has-text-color has-small-font-size">Kiến thức cơ bản và định hướng theo dõi sức khỏe gan mật tụy.</p><!-- /wp:paragraph --></div><!-- /wp:group --></div><!-- /wp:column -->
+			<!-- wp:column --><div class="wp-block-column"><!-- wp:group {"className":"drthai-service-card","style":{"spacing":{"padding":{"top":"1.6rem","right":"1.6rem","bottom":"1.6rem","left":"1.6rem"}}},"layout":{"type":"constrained"}} --><div class="wp-block-group drthai-service-card" style="padding-top:1.6rem;padding-right:1.6rem;padding-bottom:1.6rem;padding-left:1.6rem"><!-- wp:paragraph {"className":"drthai-service-icon"} --><p class="drthai-service-icon">05</p><!-- /wp:paragraph --><!-- wp:heading {"level":3,"fontSize":"large"} --><h3 class="wp-block-heading has-large-font-size">Nội soi tiêu hóa</h3><!-- /wp:heading --><!-- wp:paragraph {"textColor":"ink-soft","fontSize":"small"} --><p class="has-ink-soft-color has-text-color has-small-font-size">Giải thích chỉ định, chuẩn bị và theo dõi quanh thủ thuật nội soi.</p><!-- /wp:paragraph --></div><!-- /wp:group --></div><!-- /wp:column -->
+			<!-- wp:column --><div class="wp-block-column"><!-- wp:group {"className":"drthai-service-card","style":{"spacing":{"padding":{"top":"1.6rem","right":"1.6rem","bottom":"1.6rem","left":"1.6rem"}}},"layout":{"type":"constrained"}} --><div class="wp-block-group drthai-service-card" style="padding-top:1.6rem;padding-right:1.6rem;padding-bottom:1.6rem;padding-left:1.6rem"><!-- wp:paragraph {"className":"drthai-service-icon"} --><p class="drthai-service-icon">06</p><!-- /wp:paragraph --><!-- wp:heading {"level":3,"fontSize":"large"} --><h3 class="wp-block-heading has-large-font-size">Dinh dưỡng và phòng bệnh</h3><!-- /wp:heading --><!-- wp:paragraph {"textColor":"ink-soft","fontSize":"small"} --><p class="has-ink-soft-color has-text-color has-small-font-size">Gợi ý lối sống và dinh dưỡng hỗ trợ sức khỏe tiêu hóa lâu dài.</p><!-- /wp:paragraph --></div><!-- /wp:group --></div><!-- /wp:column -->
+		</div>
+		<!-- /wp:columns -->
+
+		<!-- wp:buttons {"layout":{"type":"flex","justifyContent":"center"},"style":{"spacing":{"margin":{"top":"2rem"}}}} --><div class="wp-block-buttons" style="margin-top:2rem"><!-- wp:button {"className":"is-style-outline"} --><div class="wp-block-button is-style-outline"><a class="wp-block-button__link wp-element-button" href="/chuyen-mon/">Xem nội dung chuyên môn</a></div><!-- /wp:button --></div><!-- /wp:buttons -->
+	</div>
+	<!-- /wp:group -->
+</div>
+<!-- /wp:group -->

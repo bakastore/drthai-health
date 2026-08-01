@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 860" role="img" aria-labelledby="title desc">
+  <title id="title">Ảnh minh họa bác sĩ</title>
+  <desc id="desc">Minh họa vector tạm thời, sẽ thay bằng ảnh bác sĩ thật.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#faf6ee"/>
+      <stop offset="1" stop-color="#e1eee2"/>
+    </linearGradient>
+    <linearGradient id="coat" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset="1" stop-color="#f1e9d8"/>
+    </linearGradient>
+  </defs>
+  <rect x="24" y="24" width="712" height="812" rx="72" fill="url(#bg)"/>
+  <circle cx="622" cy="158" r="78" fill="#d9a441" opacity=".18"/>
+  <circle cx="126" cy="684" r="98" fill="#0e5c52" opacity=".10"/>
+  <path d="M130 720c15-154 108-236 250-236s235 82 250 236v116H130z" fill="url(#coat)" stroke="#0e5c52" stroke-width="10"/>
+  <path d="M303 486l77 82 77-82 40 24-42 158H305l-42-158z" fill="#e1eee2"/>
+  <path d="M298 493l82 75 82-75" fill="none" stroke="#0e5c52" stroke-width="12" stroke-linecap="round"/>
+  <circle cx="380" cy="330" r="145" fill="#d8a684"/>
+  <path d="M248 308c4-105 58-166 145-166 86 0 143 67 143 170-31-26-60-62-72-103-56 61-130 86-216 99z" fill="#1c2b27"/>
+  <path d="M278 351c13 81 53 124 102 124 52 0 90-43 103-124" fill="none" stroke="#b9795d" stroke-width="8" stroke-linecap="round" opacity=".65"/>
+  <circle cx="326" cy="337" r="8" fill="#1c2b27"/>
+  <circle cx="434" cy="337" r="8" fill="#1c2b27"/>
+  <path d="M350 403c21 15 42 15 63 0" fill="none" stroke="#824f43" stroke-width="8" stroke-linecap="round"/>
+  <path d="M283 546c-52 35-73 90-73 168m267-168c52 35 73 90 73 168" fill="none" stroke="#0e5c52" stroke-width="9" stroke-linecap="round"/>
+  <circle cx="210" cy="714" r="29" fill="#fff" stroke="#0e5c52" stroke-width="9"/>
+  <circle cx="550" cy="714" r="29" fill="#fff" stroke="#0e5c52" stroke-width="9"/>
+  <rect x="503" y="548" width="82" height="82" rx="18" fill="#0e5c52"/>
+  <path d="M544 566v46m-23-23h46" stroke="#fff" stroke-width="13" stroke-linecap="round"/>
+  <rect x="230" y="772" width="300" height="34" rx="17" fill="#0e5c52" opacity=".14"/>
+</svg>

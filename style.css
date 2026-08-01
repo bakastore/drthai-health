@@ -1,0 +1,1006 @@
+/*
+Theme Name: DrThai Health
+Theme URI: https://drthai.blog/
+Author: DrThai
+Description: Giao diện khối dành cho website bác sĩ chuyên khoa tiêu hóa, có trung tâm tin tức và biểu mẫu yêu cầu gọi lại.
+Version: 2.0.0
+Requires at least: 6.6
+Requires PHP: 7.4
+License: GNU General Public License v2 or later
+License URI: https://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: drthai-health
+Tags: block-patterns, full-site-editing, custom-colors, custom-logo, featured-images, blog
+*/
+
+:root {
+	--drthai-bg: #faf6ee;
+	--drthai-bg-alt: #f1e9d8;
+	--drthai-ink: #1c2b27;
+	--drthai-ink-soft: #52655f;
+	--drthai-primary: #0e5c52;
+	--drthai-primary-dark: #0a403a;
+	--drthai-sage: #8fb79a;
+	--drthai-sage-pale: #e1eee2;
+	--drthai-accent: #d9a441;
+	--drthai-accent-dark: #b9832b;
+	--drthai-white: #fff;
+	--drthai-line: rgba(28, 43, 39, 0.12);
+	--drthai-shadow: 0 20px 50px -25px rgba(10, 64, 58, 0.35);
+	--drthai-shadow-lg: 0 30px 80px -35px rgba(10, 64, 58, 0.48);
+	--drthai-radius-sm: 12px;
+	--drthai-radius-md: 20px;
+	--drthai-radius-lg: 30px;
+}
+
+* {
+	box-sizing: border-box;
+}
+
+html {
+	scroll-behavior: smooth;
+}
+
+body {
+	-webkit-font-smoothing: antialiased;
+	text-rendering: optimizeLegibility;
+}
+
+img {
+	max-width: 100%;
+	height: auto;
+}
+
+a {
+	text-underline-offset: 0.18em;
+}
+
+:where(a, button, input, select, textarea):focus-visible {
+	outline: 3px solid var(--drthai-accent);
+	outline-offset: 3px;
+}
+
+.wp-site-blocks {
+	overflow-x: clip;
+}
+
+.drthai-site-header {
+	position: sticky;
+	top: 0;
+	z-index: 100;
+	background: rgba(250, 246, 238, 0.94);
+	border-bottom: 1px solid var(--drthai-line);
+	-webkit-backdrop-filter: blur(12px);
+	backdrop-filter: blur(12px);
+}
+
+.drthai-header__inner {
+	min-height: 76px;
+}
+
+.drthai-logo {
+	display: flex;
+	align-items: center;
+	gap: 0.72rem;
+	min-width: max-content;
+}
+
+.drthai-logo .wp-block-site-logo img {
+	width: 42px;
+	height: 42px;
+}
+
+.drthai-brand .wp-block-site-title {
+	font-family: var(--wp--preset--font-family--display);
+	font-size: 1.55rem;
+	font-weight: 650;
+	letter-spacing: -0.025em;
+	line-height: 1;
+	margin: 0;
+}
+
+.drthai-brand .wp-block-site-title a,
+.drthai-main-nav .wp-block-navigation-item__content,
+.drthai-footer a {
+	color: inherit;
+	text-decoration: none;
+}
+
+.drthai-brand__tagline {
+	letter-spacing: 0.06em;
+	text-transform: uppercase;
+}
+
+.drthai-main-nav {
+	flex: 1 1 auto;
+	justify-content: center;
+}
+
+.drthai-main-nav .wp-block-navigation-item__content {
+	color: var(--drthai-ink-soft);
+	position: relative;
+}
+
+.drthai-main-nav .wp-block-navigation-item__content::after {
+	background: var(--drthai-accent);
+	bottom: -7px;
+	content: "";
+	height: 2px;
+	left: 0;
+	position: absolute;
+	transition: width 180ms ease;
+	width: 0;
+}
+
+.drthai-main-nav .current-menu-item > .wp-block-navigation-item__content,
+.drthai-main-nav .wp-block-navigation-item__content:hover {
+	color: var(--drthai-primary-dark);
+}
+
+.drthai-main-nav .wp-block-navigation-item__content:hover::after {
+	width: 100%;
+}
+
+.drthai-hotline {
+	color: var(--drthai-primary-dark);
+	font-family: var(--wp--preset--font-family--mono);
+	font-size: 0.84rem;
+	font-weight: 700;
+	line-height: 1.15;
+	white-space: nowrap;
+}
+
+.drthai-hotline a {
+	color: inherit;
+	text-decoration: none;
+}
+
+.drthai-hotline small {
+	color: var(--drthai-ink-soft);
+	display: block;
+	font-family: var(--wp--preset--font-family--body);
+	font-size: 0.62rem;
+	font-weight: 500;
+	letter-spacing: 0.08em;
+	text-transform: uppercase;
+}
+
+.wp-block-button__link,
+.drthai-submit {
+	transition: transform 180ms ease, box-shadow 180ms ease, background-color 180ms ease;
+}
+
+.wp-block-button__link:hover,
+.drthai-submit:hover {
+	box-shadow: 0 14px 28px -12px rgba(217, 164, 65, 0.75);
+	transform: translateY(-2px);
+}
+
+.is-style-outline > .wp-block-button__link {
+	background: transparent;
+	border-color: var(--drthai-primary);
+	color: var(--drthai-primary-dark);
+}
+
+.is-style-outline > .wp-block-button__link:hover {
+	background: var(--drthai-primary);
+	color: var(--drthai-white);
+}
+
+.drthai-section {
+	position: relative;
+}
+
+.drthai-eyebrow,
+.drthai-kicker {
+	align-items: center;
+	color: var(--drthai-primary);
+	display: flex;
+	font-family: var(--wp--preset--font-family--mono);
+	font-size: 0.76rem;
+	font-weight: 700;
+	gap: 0.65rem;
+	letter-spacing: 0.13em;
+	text-transform: uppercase;
+}
+
+.drthai-eyebrow::before,
+.drthai-kicker::before {
+	background: var(--drthai-accent);
+	content: "";
+	display: inline-block;
+	height: 2px;
+	width: 22px;
+}
+
+.has-text-align-center.drthai-eyebrow {
+	justify-content: center;
+}
+
+.drthai-hero {
+	background:
+		radial-gradient(circle at 92% 5%, rgba(143, 183, 154, 0.26), transparent 33%),
+		var(--drthai-bg);
+	overflow: hidden;
+}
+
+.drthai-hero::before {
+	border: 1px solid rgba(14, 92, 82, 0.1);
+	border-radius: 50%;
+	content: "";
+	height: 580px;
+	position: absolute;
+	right: -210px;
+	top: -230px;
+	width: 580px;
+}
+
+.drthai-hero__layout {
+	position: relative;
+	z-index: 1;
+}
+
+.drthai-hero__title {
+	font-size: clamp(2.7rem, 5vw, 4.5rem) !important;
+	letter-spacing: -0.025em;
+	max-width: 760px;
+	text-wrap: balance;
+}
+
+.drthai-hero__title mark {
+	color: var(--drthai-accent-dark) !important;
+	font-style: italic;
+}
+
+.drthai-hero__copy {
+	max-width: 620px;
+}
+
+.drthai-trust-row {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.65rem 1.4rem;
+	margin-top: 1.8rem;
+}
+
+.drthai-trust-row span {
+	color: var(--drthai-ink-soft);
+	font-size: 0.83rem;
+}
+
+.drthai-trust-row span::before {
+	color: var(--drthai-accent-dark);
+	content: "✓";
+	font-weight: 800;
+	margin-right: 0.45rem;
+}
+
+.drthai-hero__visual {
+	position: relative;
+}
+
+.drthai-hero__image {
+	margin: 0 auto -2.2rem;
+	max-width: 520px;
+	position: relative;
+	z-index: 1;
+}
+
+.drthai-hero__image img {
+	display: block;
+	filter: drop-shadow(0 28px 32px rgba(10, 64, 58, 0.18));
+	width: 100%;
+}
+
+.drthai-hero-form {
+	background: var(--drthai-white);
+	border: 1px solid var(--drthai-line);
+	border-radius: var(--drthai-radius-md);
+	box-shadow: var(--drthai-shadow-lg);
+	margin-left: auto;
+	max-width: 500px;
+	padding: 1.45rem;
+	position: relative;
+	z-index: 3;
+}
+
+.drthai-hero-form h3 {
+	font-size: 1.35rem;
+	margin: 0 0 0.25rem;
+}
+
+.drthai-hero-form > p {
+	color: var(--drthai-ink-soft);
+	font-size: 0.84rem;
+	margin: 0 0 1rem;
+}
+
+.drthai-form-wrap,
+.drthai-contact-card,
+.drthai-article-shell,
+.drthai-empty-state {
+	background: var(--drthai-white);
+	border: 1px solid var(--drthai-line);
+	border-radius: var(--drthai-radius-md);
+	box-shadow: var(--drthai-shadow);
+}
+
+.drthai-form-wrap {
+	padding: clamp(1.25rem, 3vw, 2.2rem);
+}
+
+.drthai-form-wrap--compact {
+	border: 0;
+	box-shadow: none;
+	padding: 0;
+}
+
+.drthai-callback-form p {
+	margin: 0;
+}
+
+.drthai-form-grid {
+	display: grid;
+	gap: 1rem;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.drthai-form-wrap--compact .drthai-form-grid {
+	gap: 0.75rem;
+}
+
+.drthai-field label {
+	color: var(--drthai-primary-dark);
+	display: block;
+	font-size: 0.78rem;
+	font-weight: 700;
+	margin-bottom: 0.35rem;
+}
+
+.drthai-field label small {
+	color: var(--drthai-ink-soft);
+	font-weight: 500;
+}
+
+.drthai-field input,
+.drthai-field select,
+.drthai-news-toolbar .search-field {
+	appearance: none;
+	background: #fff;
+	border: 1px solid rgba(28, 43, 39, 0.18);
+	border-radius: 10px;
+	color: var(--drthai-ink);
+	font: inherit;
+	font-size: 0.92rem;
+	min-height: 46px;
+	padding: 0.7rem 0.85rem;
+	width: 100%;
+}
+
+.drthai-field input:focus,
+.drthai-field select:focus,
+.drthai-news-toolbar .search-field:focus {
+	border-color: var(--drthai-primary);
+	box-shadow: 0 0 0 3px rgba(14, 92, 82, 0.12);
+	outline: 0;
+}
+
+.drthai-consent {
+	color: var(--drthai-ink-soft);
+	font-size: 0.76rem;
+	line-height: 1.45;
+	margin-top: 1rem !important;
+}
+
+.drthai-consent input {
+	accent-color: var(--drthai-primary);
+	margin-right: 0.35rem;
+}
+
+.drthai-form-note {
+	color: var(--drthai-ink-soft);
+	font-size: 0.7rem;
+	line-height: 1.45;
+	margin-top: 0.7rem !important;
+}
+
+.drthai-submit,
+.drthai-news-toolbar .search-submit {
+	background: var(--drthai-accent);
+	border: 0;
+	border-radius: 999px;
+	color: var(--drthai-primary-dark);
+	cursor: pointer;
+	font: inherit;
+	font-size: 0.88rem;
+	font-weight: 750;
+	margin-top: 1rem;
+	min-height: 46px;
+	padding: 0.72rem 1.3rem;
+}
+
+.drthai-form-wrap--compact .drthai-submit {
+	width: 100%;
+}
+
+.drthai-form-alert {
+	border-radius: 10px;
+	font-size: 0.86rem;
+	font-weight: 650;
+	margin-bottom: 1rem;
+	padding: 0.85rem 1rem;
+}
+
+.drthai-form-alert--success {
+	background: var(--drthai-sage-pale);
+	color: var(--drthai-primary-dark);
+}
+
+.drthai-form-alert--error {
+	background: #fbe8e4;
+	color: #8a2d1e;
+}
+
+.drthai-honeypot {
+	height: 0;
+	left: -9999px;
+	overflow: hidden;
+	position: absolute;
+	top: auto;
+	width: 1px;
+}
+
+.drthai-ribbon {
+	background: var(--drthai-primary);
+	color: var(--drthai-white);
+	padding: 1.3rem 0;
+	transform: rotate(-0.45deg) scale(1.01);
+}
+
+.drthai-ribbon__inner {
+	display: flex;
+	gap: 1.5rem 2.8rem;
+	justify-content: center;
+	transform: rotate(0.45deg);
+}
+
+.drthai-ribbon__item {
+	align-items: center;
+	display: flex;
+	font-size: 0.88rem;
+	font-weight: 650;
+	gap: 0.55rem;
+}
+
+.drthai-ribbon__item strong {
+	color: var(--drthai-accent);
+	font-size: 1.3rem;
+}
+
+.drthai-service-card,
+.drthai-post-card,
+.drthai-news-card {
+	background: var(--drthai-white);
+	border: 1px solid var(--drthai-line);
+	border-radius: var(--drthai-radius-md);
+	box-shadow: 0 12px 35px -25px rgba(10, 64, 58, 0.45);
+	height: 100%;
+	overflow: hidden;
+	transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+}
+
+.drthai-service-card:hover,
+.drthai-post-card:hover,
+.drthai-news-card:hover {
+	border-color: rgba(14, 92, 82, 0.35);
+	box-shadow: var(--drthai-shadow);
+	transform: translateY(-5px);
+}
+
+.drthai-service-icon {
+	align-items: center;
+	background: var(--drthai-sage-pale);
+	border-radius: 14px;
+	color: var(--drthai-primary);
+	display: inline-flex;
+	font-size: 1.25rem;
+	height: 48px;
+	justify-content: center;
+	width: 48px;
+}
+
+.drthai-service-card h3 {
+	margin-bottom: 0.5rem;
+}
+
+.drthai-about__image img {
+	background: var(--drthai-bg-alt);
+	border-radius: 48% 48% 22px 22px;
+	box-shadow: var(--drthai-shadow-lg);
+	display: block;
+	width: 100%;
+}
+
+.drthai-checklist {
+	list-style: none;
+	padding-left: 0;
+}
+
+.drthai-checklist li {
+	margin-bottom: 0.72rem;
+	padding-left: 1.8rem;
+	position: relative;
+}
+
+.drthai-checklist li::before {
+	color: var(--drthai-accent-dark);
+	content: "✓";
+	font-weight: 800;
+	left: 0;
+	position: absolute;
+	top: 0;
+}
+
+.drthai-value-band {
+	background:
+		radial-gradient(circle at 90% 10%, rgba(143, 183, 154, 0.25), transparent 32%),
+		var(--drthai-primary-dark);
+	color: var(--drthai-white);
+}
+
+.drthai-value-band h2,
+.drthai-value-band h3 {
+	color: var(--drthai-white);
+}
+
+.drthai-value-item {
+	border-left: 1px solid rgba(255, 255, 255, 0.18);
+	padding-left: 1.4rem;
+}
+
+.drthai-value-item strong {
+	color: var(--drthai-accent);
+	font-family: var(--wp--preset--font-family--display);
+	font-size: 1.8rem;
+}
+
+.drthai-step {
+	position: relative;
+}
+
+.drthai-step__number {
+	align-items: center;
+	background: var(--drthai-primary);
+	border-radius: 50%;
+	color: #fff;
+	display: inline-flex;
+	font-family: var(--wp--preset--font-family--display);
+	font-size: 1.15rem;
+	height: 50px;
+	justify-content: center;
+	width: 50px;
+}
+
+.drthai-step:not(:last-child)::after {
+	border-top: 1px dashed var(--drthai-sage);
+	content: "";
+	position: absolute;
+	right: -24px;
+	top: 25px;
+	width: 48px;
+}
+
+.drthai-post-card .wp-block-post-featured-image img {
+	aspect-ratio: 16 / 10;
+	object-fit: cover;
+}
+
+.drthai-post-card .wp-block-post-title a {
+	color: var(--drthai-primary-dark);
+	text-decoration: none;
+}
+
+.drthai-cta {
+	background:
+		radial-gradient(circle at 82% 5%, rgba(143, 183, 154, 0.42), transparent 34%),
+		var(--drthai-primary);
+	border-radius: var(--drthai-radius-lg);
+	box-shadow: var(--drthai-shadow-lg);
+}
+
+.drthai-cta h2 {
+	color: #fff;
+}
+
+.drthai-cta .is-style-outline > .wp-block-button__link {
+	border-color: rgba(255, 255, 255, 0.72);
+	color: #fff;
+}
+
+.drthai-content-shell,
+.drthai-news-page,
+.drthai-contact-page {
+	min-height: 50vh;
+}
+
+.drthai-page-hero {
+	background:
+		radial-gradient(circle at 85% 20%, rgba(143, 183, 154, 0.26), transparent 28%),
+		var(--drthai-bg-alt);
+}
+
+.drthai-article-shell {
+	padding: clamp(1.25rem, 5vw, 4rem);
+}
+
+.drthai-article-shell > .wp-block-post-content > :where(h2, h3, h4) {
+	scroll-margin-top: 110px;
+}
+
+.drthai-article-shell > .wp-block-post-content img {
+	border-radius: var(--drthai-radius-sm);
+}
+
+.drthai-news-toolbar {
+	align-items: center;
+	background: var(--drthai-white);
+	border: 1px solid var(--drthai-line);
+	border-radius: 16px;
+	display: grid;
+	gap: 1.25rem;
+	grid-template-columns: 1fr minmax(220px, 320px);
+	margin-bottom: 4rem;
+	padding: 1rem;
+}
+
+.drthai-category-nav {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.55rem;
+}
+
+.drthai-category-nav a,
+.drthai-topic-cloud a {
+	background: var(--drthai-sage-pale);
+	border-radius: 999px;
+	color: var(--drthai-primary-dark);
+	font-size: 0.79rem;
+	font-weight: 650;
+	padding: 0.55rem 0.8rem;
+	text-decoration: none;
+}
+
+.drthai-category-nav a:hover,
+.drthai-topic-cloud a:hover {
+	background: var(--drthai-primary);
+	color: var(--drthai-white);
+}
+
+.drthai-category-nav span {
+	background: rgba(255, 255, 255, 0.72);
+	border-radius: 999px;
+	display: inline-block;
+	font-size: 0.67rem;
+	margin-left: 0.2rem;
+	min-width: 1.35rem;
+	padding: 0.1rem 0.35rem;
+	text-align: center;
+}
+
+.drthai-news-toolbar .search-form {
+	display: flex;
+	gap: 0.5rem;
+	margin: 0;
+}
+
+.drthai-news-toolbar .search-form label {
+	flex: 1;
+}
+
+.drthai-news-toolbar .search-submit {
+	margin-top: 0;
+}
+
+.drthai-category-section {
+	margin-bottom: clamp(3.5rem, 7vw, 6.5rem);
+}
+
+.drthai-category-heading {
+	align-items: end;
+	display: flex;
+	gap: 1rem;
+	justify-content: space-between;
+	margin-bottom: 1.5rem;
+}
+
+.drthai-category-heading h2,
+.drthai-topic-cloud h2 {
+	font-size: clamp(1.9rem, 3vw, 2.7rem);
+	margin: 0.2rem 0 0;
+}
+
+.drthai-category-heading > a,
+.drthai-read-more {
+	color: var(--drthai-primary);
+	font-size: 0.86rem;
+	font-weight: 750;
+	text-decoration: none;
+}
+
+.drthai-news-grid {
+	display: grid;
+	gap: 1.25rem;
+	grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.drthai-news-card__image {
+	background: var(--drthai-bg-alt);
+	display: block;
+	overflow: hidden;
+}
+
+.drthai-news-card__image img {
+	aspect-ratio: 16 / 10;
+	display: block;
+	object-fit: cover;
+	transition: transform 240ms ease;
+	width: 100%;
+}
+
+.drthai-news-card:hover .drthai-news-card__image img {
+	transform: scale(1.035);
+}
+
+.drthai-news-card__placeholder {
+	align-items: center;
+	background:
+		radial-gradient(circle at 70% 20%, rgba(217, 164, 65, 0.5), transparent 30%),
+		var(--drthai-sage-pale);
+	color: var(--drthai-primary);
+	display: flex;
+	font-family: var(--wp--preset--font-family--display);
+	font-size: 3rem;
+	justify-content: center;
+	aspect-ratio: 16 / 10;
+}
+
+.drthai-news-card__body {
+	padding: 1.25rem;
+}
+
+.drthai-news-card__body time {
+	color: var(--drthai-accent-dark);
+	font-family: var(--wp--preset--font-family--mono);
+	font-size: 0.7rem;
+	font-weight: 650;
+}
+
+.drthai-news-card__body h3 {
+	font-size: 1.28rem;
+	margin: 0.55rem 0 0.6rem;
+}
+
+.drthai-news-card__body h3 a {
+	color: inherit;
+	text-decoration: none;
+}
+
+.drthai-news-card__body p {
+	color: var(--drthai-ink-soft);
+	font-size: 0.87rem;
+	margin: 0 0 1rem;
+}
+
+.drthai-empty-state {
+	box-shadow: none;
+	color: var(--drthai-ink-soft);
+	padding: 1.5rem;
+}
+
+.drthai-topic-cloud {
+	background: var(--drthai-bg-alt);
+	border-radius: var(--drthai-radius-md);
+	padding: clamp(1.4rem, 4vw, 2.8rem);
+}
+
+.drthai-topic-cloud > div {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.65rem;
+	margin-top: 1.2rem;
+}
+
+.drthai-contact-layout {
+	align-items: start !important;
+}
+
+.drthai-contact-card {
+	padding: clamp(1.3rem, 3vw, 2rem);
+}
+
+.drthai-contact-list {
+	list-style: none;
+	padding: 0;
+}
+
+.drthai-contact-list li {
+	border-bottom: 1px solid var(--drthai-line);
+	margin: 0;
+	padding: 1rem 0;
+}
+
+.drthai-contact-list strong {
+	color: var(--drthai-primary-dark);
+	display: block;
+	font-size: 0.76rem;
+	letter-spacing: 0.07em;
+	margin-bottom: 0.2rem;
+	text-transform: uppercase;
+}
+
+.drthai-contact-list a {
+	text-decoration: none;
+}
+
+.drthai-footer {
+	background: #082f2b;
+	color: rgba(255, 255, 255, 0.82);
+}
+
+.drthai-footer h2,
+.drthai-footer h3,
+.drthai-footer h4 {
+	color: #fff;
+}
+
+.drthai-footer a:hover {
+	color: var(--drthai-accent);
+}
+
+.drthai-footer__bottom {
+	border-top: 1px solid rgba(255, 255, 255, 0.14);
+}
+
+@media (max-width: 1080px) {
+	.drthai-hotline {
+		display: none;
+	}
+}
+
+@media (max-width: 900px) {
+	.drthai-header-cta {
+		display: none;
+	}
+
+	.drthai-news-grid {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+	}
+
+	.drthai-news-toolbar {
+		grid-template-columns: 1fr;
+	}
+
+	.drthai-step:not(:last-child)::after {
+		display: none;
+	}
+}
+
+@media (max-width: 781px) {
+	.drthai-header__inner {
+		min-height: 66px;
+	}
+
+	.drthai-brand__tagline {
+		display: none;
+	}
+
+	.wp-block-navigation__responsive-container.is-menu-open {
+		background: var(--drthai-bg) !important;
+		color: var(--drthai-ink) !important;
+		padding: 1.5rem;
+	}
+
+	.wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation__responsive-container-content {
+		align-items: flex-start;
+	}
+
+	.drthai-hero {
+		text-align: center;
+	}
+
+	.drthai-hero .drthai-eyebrow,
+	.drthai-hero .wp-block-buttons,
+	.drthai-trust-row {
+		justify-content: center;
+	}
+
+	.drthai-hero__visual {
+		margin-top: 1rem;
+	}
+
+	.drthai-ribbon__inner {
+		gap: 0.75rem 1.4rem;
+	}
+
+	.drthai-ribbon__item {
+		font-size: 0.76rem;
+	}
+
+	.drthai-value-item {
+		border-left: 0;
+		border-top: 1px solid rgba(255, 255, 255, 0.16);
+		padding-left: 0;
+		padding-top: 1rem;
+	}
+}
+
+@media (max-width: 600px) {
+	body {
+		--wp--style--root--padding-left: 1rem;
+		--wp--style--root--padding-right: 1rem;
+	}
+
+	.drthai-logo .wp-block-site-logo img {
+		height: 36px;
+		width: 36px;
+	}
+
+	.drthai-brand .wp-block-site-title {
+		font-size: 1.3rem;
+	}
+
+	.drthai-hero__title {
+		font-size: clamp(2.25rem, 12vw, 3.1rem) !important;
+	}
+
+	.drthai-hero-form,
+	.drthai-form-wrap,
+	.drthai-contact-card,
+	.drthai-article-shell {
+		border-radius: 16px;
+		padding: 1.1rem;
+	}
+
+	.drthai-form-grid,
+	.drthai-news-grid {
+		grid-template-columns: 1fr;
+	}
+
+	.drthai-ribbon {
+		transform: none;
+	}
+
+	.drthai-ribbon__inner {
+		align-items: flex-start;
+		flex-direction: column;
+		transform: none;
+	}
+
+	.drthai-category-heading {
+		align-items: flex-start;
+		flex-direction: column;
+	}
+
+	.drthai-news-toolbar .search-form {
+		flex-direction: column;
+	}
+
+	.drthai-news-toolbar .search-submit {
+		width: 100%;
+	}
+
+	.drthai-cta {
+		border-radius: 20px;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	html {
+		scroll-behavior: auto;
+	}
+
+	*,
+	*::before,
+	*::after {
+		transition-duration: 0.01ms !important;
+	}
+}

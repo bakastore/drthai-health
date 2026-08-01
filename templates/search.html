@@ -1,0 +1,12 @@
+<!-- wp:template-part {"slug":"header","tagName":"header"} /-->
+<!-- wp:group {"tagName":"main","align":"full","backgroundColor":"background","className":"drthai-content-shell","style":{"spacing":{"padding":{"top":"var:preset|spacing|60","bottom":"var:preset|spacing|70"}}},"layout":{"type":"constrained"}} -->
+<main class="wp-block-group alignfull drthai-content-shell has-background-background-color has-background" style="padding-top:var(--wp--preset--spacing--60);padding-bottom:var(--wp--preset--spacing--70)">
+	<!-- wp:query-title {"type":"search","textAlign":"center","fontSize":"x-large"} /-->
+	<!-- wp:search {"label":"Tìm kiếm","showLabel":false,"placeholder":"Tìm bài viết…","buttonText":"Tìm","buttonUseIcon":true,"align":"center","style":{"spacing":{"margin":{"top":"1.5rem","bottom":"2.5rem"}}}} /-->
+	<!-- wp:query {"queryId":50,"query":{"perPage":9,"pages":0,"offset":0,"postType":"post","order":"desc","orderBy":"date","author":"","search":"","exclude":[],"sticky":"","inherit":true},"displayLayout":{"type":"flex","columns":3},"align":"wide"} -->
+	<div class="wp-block-query alignwide"><!-- wp:post-template --><!-- wp:group {"className":"drthai-post-card","style":{"spacing":{"padding":{"top":"0","right":"1.25rem","bottom":"1.35rem","left":"1.25rem"}},"dimensions":{"minHeight":"100%"}},"layout":{"type":"constrained"}} --><div class="wp-block-group drthai-post-card" style="min-height:100%;padding-top:0;padding-right:1.25rem;padding-bottom:1.35rem;padding-left:1.25rem"><!-- wp:post-featured-image {"isLink":true,"aspectRatio":"16/10","style":{"spacing":{"margin":{"right":"-1.25rem","left":"-1.25rem"}}}} /--><!-- wp:post-title {"isLink":true,"fontSize":"large"} /--><!-- wp:post-excerpt {"moreText":"Đọc tiếp","excerptLength":22,"fontSize":"small"} /--></div><!-- /wp:group --><!-- /wp:post-template --><!-- wp:query-pagination {"layout":{"type":"flex","justifyContent":"center"}} --><div class="wp-block-query-pagination"><!-- wp:query-pagination-previous /--><!-- wp:query-pagination-numbers /--><!-- wp:query-pagination-next /--></div><!-- /wp:query-pagination --><!-- wp:query-no-results --><!-- wp:paragraph {"align":"center","textColor":"ink-soft"} --><p class="has-text-align-center has-ink-soft-color has-text-color">Không tìm thấy bài viết phù hợp.</p><!-- /wp:paragraph --><!-- /wp:query-no-results --></div>
+	<!-- /wp:query -->
+</main>
+<!-- /wp:group -->
+<!-- wp:template-part {"slug":"footer","tagName":"footer"} /-->
+

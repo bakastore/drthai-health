@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 760" role="img" aria-labelledby="title desc">
+  <title id="title">Minh họa chăm sóc hệ tiêu hóa</title>
+  <desc id="desc">Hình vector trừu tượng về hệ tiêu hóa và sự chăm sóc y khoa.</desc>
+  <defs>
+    <linearGradient id="panel" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#e1eee2"/>
+      <stop offset="1" stop-color="#faf6ee"/>
+    </linearGradient>
+    <linearGradient id="organ" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#8fb79a"/>
+      <stop offset="1" stop-color="#0e5c52"/>
+    </linearGradient>
+  </defs>
+  <rect width="900" height="760" rx="72" fill="url(#panel)"/>
+  <circle cx="135" cy="138" r="82" fill="#d9a441" opacity=".12"/>
+  <circle cx="765" cy="610" r="112" fill="#0e5c52" opacity=".08"/>
+  <path d="M460 112c-42 64-57 131-47 202 7 50-4 91-35 123-43 44-55 101-33 156 29 74 126 95 188 42 54-46 53-119 32-181-19-56-17-102 4-139 32-58 15-140-39-190-20-18-47-22-70-13z" fill="#fff" stroke="#0e5c52" stroke-width="12"/>
+  <path d="M470 253c-47 10-72 43-67 87 4 35 25 59 58 72-49 32-64 79-38 123 26 45 83 52 119 16 35-35 30-83 6-125-18-31-18-57 0-82 29-42-4-102-78-91z" fill="url(#organ)" opacity=".88"/>
+  <path d="M420 423c-53-7-88 23-91 70-4 53 36 91 92 85m134-149c56 4 87 38 84 85-4 51-45 80-94 73" fill="none" stroke="#8fb79a" stroke-width="20" stroke-linecap="round"/>
+  <path d="M205 315c40-42 92-44 126-11-40 45-85 54-126 11zm490-28c-45-35-96-29-125 9 45 38 92 39 125-9z" fill="#fff" stroke="#0e5c52" stroke-width="10"/>
+  <path d="M175 525c44 59 104 97 181 113m369-148c-47 65-108 104-183 120" fill="none" stroke="#0e5c52" stroke-width="12" stroke-linecap="round" opacity=".7"/>
+  <rect x="115" y="545" width="112" height="112" rx="30" fill="#0e5c52"/>
+  <path d="M171 573v56m-28-28h56" stroke="#fff" stroke-width="17" stroke-linecap="round"/>
+  <path d="M734 142c34 0 61 27 61 61s-27 61-61 61-61-27-61-61 27-61 61-61z" fill="#fff" stroke="#d9a441" stroke-width="9"/>
+  <path d="M706 203h56M734 175v56" stroke="#0e5c52" stroke-width="12" stroke-linecap="round"/>
+</svg>
