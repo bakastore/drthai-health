@@ -1,0 +1,9 @@
+node_modules/
+.env.*
+*.pem
+*.key
+.agents/
+.wp-env.override.json
+__pycache__/
+*.py[cod]
+.env

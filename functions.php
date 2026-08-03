@@ -232,6 +232,21 @@ function drthai_health_callback_form_shortcode( $atts ) {
 add_shortcode( 'drthai_callback_form', 'drthai_health_callback_form_shortcode' );
 
 /**
+ * Render the callback shortcode when its block is nested inside a pattern.
+ *
+ * @param string $block_content Rendered shortcode block content.
+ * @return string
+ */
+function drthai_health_render_callback_shortcode_block( $block_content ) {
+	if ( false === strpos( $block_content, '[drthai_callback_form' ) ) {
+		return $block_content;
+	}
+
+	return do_shortcode( $block_content );
+}
+add_filter( 'render_block_core/shortcode', 'drthai_health_render_callback_shortcode_block' );
+
+/**
  * Redirect back to the source page with a form status.
  *
  * @param string $status Status key.

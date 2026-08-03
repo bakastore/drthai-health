@@ -40,9 +40,7 @@
 
 		<!-- wp:column {"verticalAlignment":"center","width":"45%","className":"drthai-hero__visual"} -->
 		<div class="wp-block-column is-vertically-aligned-center drthai-hero__visual" style="flex-basis:45%">
-			<!-- wp:image {"sizeSlug":"full","linkDestination":"none","className":"drthai-hero__image"} -->
-			<figure class="wp-block-image size-full drthai-hero__image"><img src="<?php echo esc_url( get_theme_file_uri( 'assets/images/doctor-placeholder.svg' ) ); ?>" alt="Ảnh minh họa, sẽ thay bằng ảnh Thạc sĩ Nguyễn Hồng Thái"/></figure>
-			<!-- /wp:image -->
+
 
 			<!-- wp:group {"className":"drthai-hero-form","layout":{"type":"constrained"}} -->
 			<div class="wp-block-group drthai-hero-form">
@@ -57,4 +55,3 @@
 	<!-- /wp:columns -->
 </div>
 <!-- /wp:group -->
-

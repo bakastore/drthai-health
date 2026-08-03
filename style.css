@@ -3,7 +3,7 @@ Theme Name: DrThai Health
 Theme URI: https://drthai.blog/
 Author: DrThai
 Description: Giao diện khối dành cho website bác sĩ chuyên khoa tiêu hóa, có trung tâm tin tức và biểu mẫu yêu cầu gọi lại.
-Version: 2.0.0
+Version: 1.0.1
 Requires at least: 6.6
 Requires PHP: 7.4
 License: GNU General Public License v2 or later
@@ -1002,5 +1002,351 @@ a {
 	*::before,
 	*::after {
 		transition-duration: 0.01ms !important;
+	}
+}
+
+.drthai-about-page {
+	overflow: hidden;
+}
+
+.drthai-about-page > .wp-block-post-content {
+	margin-block-start: 0;
+}
+
+.drthai-about-profile {
+	background:
+		radial-gradient(circle at 88% 8%, rgba(217, 164, 65, 0.2), transparent 28%),
+		var(--drthai-bg-alt);
+}
+
+.drthai-about-profile h2 {
+	text-wrap: balance;
+}
+
+.drthai-about-profile .wp-block-column:first-child > p {
+	max-width: 680px;
+}
+
+.drthai-about-facts {
+	border: 1px solid var(--drthai-line);
+	border-radius: var(--drthai-radius-md);
+	box-shadow: var(--drthai-shadow-lg);
+}
+
+.drthai-about-facts__item {
+	border-top: 1px solid var(--drthai-line);
+	padding-top: 1rem;
+}
+
+.drthai-about-facts__item p {
+	margin: 0;
+}
+
+.drthai-about-facts__item strong {
+	color: var(--drthai-primary);
+	display: inline-block;
+	font-size: 0.78rem;
+	letter-spacing: 0.08em;
+	margin-bottom: 0.25rem;
+	text-transform: uppercase;
+}
+
+.drthai-about-principles__card,
+.drthai-about-page__resource-card {
+	border: 1px solid var(--drthai-line);
+	border-radius: var(--drthai-radius-md);
+	height: 100%;
+	padding: clamp(1.25rem, 3vw, 2rem);
+}
+
+.drthai-about-principles__card {
+	box-shadow: 0 16px 42px -30px rgba(10, 64, 58, 0.55);
+}
+
+.drthai-about-principles__card h3,
+.drthai-about-page__resource-card h3 {
+	margin-top: 0;
+}
+
+.drthai-about-page__resource-card {
+	background: var(--drthai-bg);
+	border-top: 4px solid var(--drthai-accent);
+}
+
+.drthai-about-page__resource-card a {
+	color: var(--drthai-primary-dark);
+	text-decoration-thickness: 1px;
+}
+
+.drthai-about-page__resource-card a:hover {
+	color: var(--drthai-primary);
+}
+
+.drthai-about-notice > .wp-block-group {
+	border-left: 5px solid var(--drthai-primary);
+	border-radius: var(--drthai-radius-sm);
+	padding: clamp(1.25rem, 3vw, 2rem);
+}
+
+.drthai-about-notice h2 {
+	margin-top: 0;
+}
+
+.drthai-about-cta > .wp-block-group {
+	border-radius: var(--drthai-radius-lg);
+	box-shadow: var(--drthai-shadow-lg);
+	padding: clamp(2rem, 6vw, 4.5rem);
+}
+
+.drthai-about-cta .is-style-outline > .wp-block-button__link {
+	border-color: rgba(255, 255, 255, 0.75);
+	color: var(--drthai-white);
+}
+
+.drthai-about-profile .wp-block-button__link,
+.drthai-about-cta .wp-block-button__link {
+	align-items: center;
+	display: inline-flex;
+	justify-content: center;
+	min-height: 46px;
+}
+
+@media (max-width: 781px) {
+	.drthai-about-profile > .wp-block-columns {
+		gap: 2.5rem;
+	}
+
+	.drthai-about-principles .wp-block-columns,
+	.drthai-about-page__resources .wp-block-columns {
+		gap: 1rem;
+	}
+}
+
+@media (max-width: 600px) {
+	.drthai-about-profile,
+	.drthai-about-principles,
+	.drthai-about-page__resources,
+	.drthai-about-notice,
+	.drthai-about-cta {
+		padding-left: 1rem;
+		padding-right: 1rem;
+	}
+
+	.drthai-about-profile .wp-block-buttons,
+	.drthai-about-cta .wp-block-buttons {
+		align-items: stretch;
+		flex-direction: column;
+	}
+
+	.drthai-about-profile .wp-block-button,
+	.drthai-about-profile .wp-block-button__link,
+	.drthai-about-cta .wp-block-button,
+	.drthai-about-cta .wp-block-button__link {
+		width: 100%;
+	}
+
+	.drthai-about-facts {
+		padding: 1.25rem !important;
+	}
+
+	.drthai-about-cta > .wp-block-group {
+		border-radius: 20px;
+	}
+}
+
+.drthai-services-page {
+	overflow: hidden;
+}
+
+.drthai-services-page > .wp-block-post-content {
+	margin-block-start: 0;
+}
+
+.drthai-services-intro {
+	background:
+		radial-gradient(circle at 88% 8%, rgba(217, 164, 65, 0.2), transparent 28%),
+		var(--drthai-bg-alt);
+}
+
+.drthai-services-intro h2 {
+	text-wrap: balance;
+}
+
+.drthai-services-intro .wp-block-button__link,
+.drthai-services-cta .wp-block-button__link {
+	align-items: center;
+	display: inline-flex;
+	justify-content: center;
+	min-height: 46px;
+}
+
+.drthai-service-grid__items {
+	display: grid;
+	gap: 1.25rem;
+	grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.drthai-service-card {
+	border: 1px solid var(--drthai-line);
+	border-top: 4px solid var(--drthai-accent);
+	border-radius: var(--drthai-radius-md);
+	box-shadow: 0 16px 42px -30px rgba(10, 64, 58, 0.55);
+	height: 100%;
+	padding: clamp(1.25rem, 3vw, 2rem);
+}
+
+.drthai-service-card__number,
+.drthai-services-process__number {
+	font-family: var(--wp--preset--font-family--mono);
+	font-size: 0.82rem;
+	font-weight: 700;
+	letter-spacing: 0.12em;
+	margin-bottom: 1.5rem;
+}
+
+.drthai-service-card__number {
+	color: var(--drthai-accent-dark);
+}
+
+.drthai-service-card h3,
+.drthai-service-pathways__card h3,
+.drthai-services-process__step h3 {
+	margin-top: 0;
+}
+
+.drthai-service-pathways__card {
+	background: var(--drthai-bg);
+	border: 1px solid var(--drthai-line);
+	border-radius: var(--drthai-radius-md);
+	height: 100%;
+	padding: clamp(1.25rem, 3vw, 2rem);
+}
+
+.drthai-service-pathways__note {
+	color: var(--drthai-ink-soft);
+	font-style: italic;
+	margin-left: auto;
+	margin-right: auto;
+	max-width: 760px;
+}
+
+.drthai-services-process__grid {
+	display: grid;
+	gap: 1rem;
+	grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.drthai-services-process__step {
+	border-left: 2px solid var(--drthai-accent);
+	padding: 0.25rem 1rem 0.25rem 1.25rem;
+}
+
+.drthai-services-process__number {
+	color: var(--drthai-accent);
+}
+
+.drthai-services-process__step p:last-child {
+	color: rgba(255, 255, 255, 0.82);
+}
+
+.drthai-services-notice > .wp-block-group {
+	border-left: 5px solid var(--drthai-primary);
+	border-radius: var(--drthai-radius-sm);
+	padding: clamp(1.25rem, 3vw, 2rem);
+}
+
+.drthai-services-notice h2 {
+	margin-top: 0;
+}
+
+.drthai-services-faq__list {
+	max-width: 900px;
+}
+
+.drthai-services-faq details {
+	border-bottom: 1px solid var(--drthai-line);
+	padding: 0.5rem 0;
+}
+
+.drthai-services-faq summary {
+	align-items: center;
+	cursor: pointer;
+	display: flex;
+	font-weight: 700;
+	min-height: 44px;
+	padding: 0.75rem 0;
+}
+
+.drthai-services-faq summary:focus-visible {
+	border-radius: 4px;
+	outline: 3px solid var(--drthai-accent);
+	outline-offset: 4px;
+}
+
+.drthai-services-faq details p {
+	color: var(--drthai-ink-soft);
+	padding-bottom: 0.75rem;
+}
+
+.drthai-services-cta > .wp-block-group {
+	border-radius: var(--drthai-radius-lg);
+	box-shadow: var(--drthai-shadow-lg);
+	padding: clamp(2rem, 6vw, 4.5rem);
+}
+
+.drthai-services-cta .is-style-outline > .wp-block-button__link {
+	border-color: rgba(255, 255, 255, 0.75);
+	color: var(--drthai-white);
+}
+
+@media (max-width: 900px) {
+	.drthai-service-grid__items,
+	.drthai-services-process__grid {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+	}
+}
+
+@media (max-width: 781px) {
+	.drthai-services-intro > .wp-block-columns {
+		gap: 2.5rem;
+	}
+
+	.drthai-service-pathways .wp-block-columns {
+		gap: 1rem;
+	}
+}
+
+@media (max-width: 600px) {
+	.drthai-services-intro,
+	.drthai-service-grid,
+	.drthai-service-pathways,
+	.drthai-services-process,
+	.drthai-services-notice,
+	.drthai-services-faq,
+	.drthai-services-cta {
+		padding-left: 1rem;
+		padding-right: 1rem;
+	}
+
+	.drthai-service-grid__items,
+	.drthai-services-process__grid {
+		grid-template-columns: 1fr;
+	}
+
+	.drthai-services-intro .wp-block-buttons,
+	.drthai-services-cta .wp-block-buttons {
+		align-items: stretch;
+		flex-direction: column;
+	}
+
+	.drthai-services-intro .wp-block-button,
+	.drthai-services-intro .wp-block-button__link,
+	.drthai-services-cta .wp-block-button,
+	.drthai-services-cta .wp-block-button__link {
+		width: 100%;
+	}
+
+	.drthai-services-cta > .wp-block-group {
+		border-radius: 20px;
 	}
 }
