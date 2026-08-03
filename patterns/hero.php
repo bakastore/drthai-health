@@ -40,15 +40,19 @@
 
 		<!-- wp:column {"verticalAlignment":"center","width":"45%","className":"drthai-hero__visual"} -->
 		<div class="wp-block-column is-vertically-aligned-center drthai-hero__visual" style="flex-basis:45%">
+			<!-- wp:image {"sizeSlug":"full","linkDestination":"none","className":"drthai-hero-media"} -->
+				<figure class="wp-block-image size-full drthai-hero-media">
+					<img
+						src="<?php echo esc_url( get_theme_file_uri( 'assets/images/hero-doctor.webp' ) ); ?>"
+						alt="Bác sĩ Nguyễn Hồng Thái trong môi trường khám và tư vấn tiêu hóa"
+						loading="eager"
+						fetchpriority="high"
+						decoding="async"
+					/>
+				</figure>
+				<!-- /wp:image -->
 
 
-			<!-- wp:group {"className":"drthai-hero-form","layout":{"type":"constrained"}} -->
-			<div class="wp-block-group drthai-hero-form">
-				<!-- wp:heading {"level":3} --><h3 class="wp-block-heading">Yêu cầu gọi lại nhanh</h3><!-- /wp:heading -->
-				<!-- wp:paragraph --><p>Chỉ cần để lại thông tin cơ bản, không nhập triệu chứng hay hồ sơ bệnh án.</p><!-- /wp:paragraph -->
-				<!-- wp:shortcode -->[drthai_callback_form compact="1"]<!-- /wp:shortcode -->
-			</div>
-			<!-- /wp:group -->
 		</div>
 		<!-- /wp:column -->
 	</div>

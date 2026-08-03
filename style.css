@@ -3,7 +3,7 @@ Theme Name: DrThai Health
 Theme URI: https://drthai.blog/
 Author: DrThai
 Description: Giao diện khối dành cho website bác sĩ chuyên khoa tiêu hóa, có trung tâm tin tức và biểu mẫu yêu cầu gọi lại.
-Version: 1.0.2
+Version: 1.0.3
 Requires at least: 6.6
 Requires PHP: 7.4
 License: GNU General Public License v2 or later
@@ -253,6 +253,173 @@ a {
 
 .drthai-hero__copy {
 	max-width: 620px;
+}
+/* Hero medical image — production styling. */
+.drthai-hero__visual {
+	position: relative;
+	align-self: stretch;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: clamp(24px, 4vw, 54px) 0;
+	isolation: isolate;
+}
+
+/* Decorative background glow. */
+.drthai-hero__visual::before {
+	content: "";
+	position: absolute;
+	z-index: -2;
+	top: 9%;
+	right: -7%;
+	width: 76%;
+	aspect-ratio: 1;
+	border-radius: 50%;
+	background:
+		radial-gradient(
+			circle,
+			rgba(25, 111, 96, 0.14) 0%,
+			rgba(25, 111, 96, 0.055) 48%,
+			rgba(25, 111, 96, 0) 72%
+		);
+	pointer-events: none;
+}
+
+/* Small gold accent behind image. */
+.drthai-hero__visual::after {
+	content: "";
+	position: absolute;
+	z-index: -1;
+	right: -14px;
+	bottom: 8%;
+	width: 42%;
+	height: 44%;
+	border-radius: 28px;
+	background: rgba(224, 165, 54, 0.16);
+	transform: rotate(3deg);
+	pointer-events: none;
+}
+
+.drthai-hero-media {
+	position: relative;
+	width: min(100%, 500px);
+	aspect-ratio: 4 / 5;
+	margin: 0;
+	overflow: hidden;
+	border: 8px solid rgba(255, 255, 255, 0.88);
+	border-radius: 32px 8px 32px 8px;
+	background: #e7eeeb;
+	box-shadow:
+		0 30px 70px rgba(15, 72, 62, 0.18),
+		0 8px 22px rgba(15, 72, 62, 0.1);
+	transform: translateZ(0);
+}
+
+/* Soft tonal overlay for visual consistency. */
+.drthai-hero-media::after {
+	content: "";
+	position: absolute;
+	inset: 0;
+	background:
+		linear-gradient(
+			180deg,
+			rgba(7, 66, 57, 0.02) 0%,
+			rgba(7, 66, 57, 0) 55%,
+			rgba(7, 66, 57, 0.1) 100%
+		);
+	pointer-events: none;
+}
+
+.drthai-hero-media img {
+	display: block;
+	width: 100%;
+	height: 100%;
+	margin: 0;
+	object-fit: cover;
+	object-position: 52% 38%;
+	transition:
+		transform 500ms ease,
+		filter 500ms ease;
+}
+
+/* Subtle interaction on desktop. */
+@media (hover: hover) and (pointer: fine) {
+	.drthai-hero-media:hover img {
+		transform: scale(1.025);
+		filter: saturate(1.03) contrast(1.015);
+	}
+}
+
+/* Tablet. */
+@media (max-width: 1024px) {
+	.drthai-hero__visual {
+		padding-block: 30px;
+	}
+
+	.drthai-hero-media {
+		width: min(100%, 450px);
+		border-width: 6px;
+		border-radius: 26px 8px 26px 8px;
+	}
+}
+
+/* Mobile. */
+@media (max-width: 781px) {
+	.drthai-hero__visual {
+		width: 100%;
+		padding: 20px 0 8px;
+	}
+
+	.drthai-hero__visual::before {
+		top: 4%;
+		right: -14%;
+		width: 92%;
+	}
+
+	.drthai-hero__visual::after {
+		right: 1%;
+		bottom: 1%;
+		width: 38%;
+		height: 38%;
+		border-radius: 20px;
+	}
+
+	.drthai-hero-media {
+		width: min(100%, 440px);
+		aspect-ratio: 4 / 5;
+		border-width: 5px;
+		border-radius: 22px 6px 22px 6px;
+		box-shadow:
+			0 22px 46px rgba(15, 72, 62, 0.16),
+			0 6px 16px rgba(15, 72, 62, 0.08);
+	}
+
+	.drthai-hero-media img {
+		object-position: 52% 34%;
+	}
+}
+
+/* Small mobile screens. */
+@media (max-width: 480px) {
+	.drthai-hero__visual {
+		padding-top: 12px;
+	}
+
+	.drthai-hero-media {
+		width: 100%;
+		border-radius: 18px 5px 18px 5px;
+	}
+}
+
+/* Respect reduced-motion preference. */
+@media (prefers-reduced-motion: reduce) {
+	.drthai-hero-media img {
+		transition: none;
+	}
+
+	.drthai-hero-media:hover img {
+		transform: none;
+	}
 }
 
 .drthai-trust-row {
