@@ -205,17 +205,25 @@ function drthai_health_booking_time_slots() {
  * @return string
  */
 function drthai_health_callback_form_shortcode( $atts ) {
-	$atts = shortcode_atts( array( 'compact' => '0' ), $atts, 'drthai_callback_form' );
-	$compact = '1' === (string) $atts['compact'];
-	$status  = isset( $_GET['drthai_callback'] ) ? sanitize_key( wp_unslash( $_GET['drthai_callback'] ) ) : '';
+	$atts       = shortcode_atts( array( 'compact' => '0' ), $atts, 'drthai_callback_form' );
+	$compact    = '1' === (string) $atts['compact'];
+	$status     = isset( $_GET['drthai_callback'] ) ? sanitize_key( wp_unslash( $_GET['drthai_callback'] ) ) : '';
+	$services   = drthai_health_booking_services();
+	$time_slots = drthai_health_booking_time_slots();
+	$today      = wp_date( 'Y-m-d' );
 
 	ob_start();
 	?>
 	<div class="drthai-form-wrap<?php echo $compact ? ' drthai-form-wrap--compact' : ''; ?>">
+		<div class="drthai-form-intro">
+			<h2>Gửi yêu cầu đặt lịch khám</h2>
+			<p>Đây là yêu cầu liên hệ, chưa phải lịch hẹn được xác nhận.<br>Nhân viên hỗ trợ sẽ gọi lại để thống nhất thời gian và địa điểm.</p>
+		</div>
+
 		<?php if ( 'success' === $status ) : ?>
-			<div class="drthai-form-alert drthai-form-alert--success" role="status">Đã ghi nhận yêu cầu. Bác sĩ hoặc người hỗ trợ sẽ liên hệ lại theo thông tin anh/chị cung cấp.</div>
+			<div class="drthai-form-alert drthai-form-alert--success" role="status">Đã ghi nhận yêu cầu đặt lịch. Nhân viên hỗ trợ sẽ liên hệ để xác nhận thời gian và địa điểm phù hợp.</div>
 		<?php elseif ( 'error' === $status ) : ?>
-			<div class="drthai-form-alert drthai-form-alert--error" role="alert">Chưa thể ghi nhận yêu cầu. Vui lòng kiểm tra họ tên, số điện thoại và ô đồng ý.</div>
+			<div class="drthai-form-alert drthai-form-alert--error" role="alert">Chưa thể ghi nhận yêu cầu. Vui lòng kiểm tra các trường bắt buộc và thử lại.</div>
 		<?php elseif ( 'rate' === $status ) : ?>
 			<div class="drthai-form-alert drthai-form-alert--error" role="alert">Yêu cầu đã được gửi gần đây. Vui lòng chờ ít phút hoặc gọi trực tiếp 0977 703 663.</div>
 		<?php endif; ?>
@@ -224,37 +232,64 @@ function drthai_health_callback_form_shortcode( $atts ) {
 			<?php wp_nonce_field( 'drthai_callback_submit', 'drthai_callback_nonce' ); ?>
 			<input type="hidden" name="action" value="drthai_callback_submit">
 			<input type="hidden" name="redirect_to" value="<?php echo esc_url( get_permalink() ); ?>">
-			<div class="drthai-honeypot" aria-hidden="true"><label>Không điền trường này<input type="text" name="company_website" tabindex="-1" autocomplete="off"></label></div>
+
+			<div class="drthai-honeypot" aria-hidden="true">
+				<label>Không điền trường này<input type="text" name="company_website" tabindex="-1" autocomplete="off"></label>
+			</div>
 
 			<div class="drthai-form-grid">
 				<p class="drthai-field">
 					<label for="drthai-name">Họ và tên <span aria-hidden="true">*</span></label>
 					<input id="drthai-name" name="contact_name" type="text" maxlength="80" autocomplete="name" required>
 				</p>
+
 				<p class="drthai-field">
 					<label for="drthai-phone">Số điện thoại <span aria-hidden="true">*</span></label>
-					<input id="drthai-phone" name="contact_phone" type="tel" maxlength="20" inputmode="tel" autocomplete="tel" pattern="[0-9+(). -]{8,20}" required>
+					<input id="drthai-phone" name="contact_phone" type="tel" maxlength="20" inputmode="tel" autocomplete="tel" pattern="[0-9+(). -]{9,20}" required>
 				</p>
+
+				<p class="drthai-field">
+					<label for="drthai-service">Dịch vụ quan tâm <span aria-hidden="true">*</span></label>
+					<select id="drthai-service" name="booking_service" required>
+						<option value="">Chọn dịch vụ</option>
+						<?php foreach ( $services as $value => $label ) : ?>
+							<option value="<?php echo esc_attr( $value ); ?>"><?php echo esc_html( $label ); ?></option>
+						<?php endforeach; ?>
+					</select>
+				</p>
+
+				<p class="drthai-field">
+					<label for="drthai-date">Ngày mong muốn <span aria-hidden="true">*</span></label>
+					<input id="drthai-date" name="preferred_date" type="date" min="<?php echo esc_attr( $today ); ?>" required>
+				</p>
+
+				<p class="drthai-field">
+					<label for="drthai-time">Khung giờ mong muốn</label>
+					<select id="drthai-time" name="preferred_time">
+						<?php foreach ( $time_slots as $value => $label ) : ?>
+							<option value="<?php echo esc_attr( $value ); ?>"><?php echo esc_html( $label ); ?></option>
+						<?php endforeach; ?>
+					</select>
+				</p>
+
 				<p class="drthai-field">
 					<label for="drthai-email">Email <small>(không bắt buộc)</small></label>
 					<input id="drthai-email" name="contact_email" type="email" maxlength="120" autocomplete="email">
 				</p>
-				<p class="drthai-field">
-					<label for="drthai-time">Thời gian muốn nhận cuộc gọi</label>
-					<select id="drthai-time" name="contact_time">
-						<option value="Bất kỳ thời gian phù hợp">Bất kỳ thời gian phù hợp</option>
-						<option value="Buổi sáng 08:00–11:30">Buổi sáng 08:00–11:30</option>
-						<option value="Buổi chiều 13:30–17:30">Buổi chiều 13:30–17:30</option>
-						<option value="Buổi tối 18:00–20:00">Buổi tối 18:00–20:00</option>
-					</select>
+
+				<p class="drthai-field drthai-field--full">
+					<label for="drthai-note">Ghi chú liên hệ <small>(không bắt buộc)</small></label>
+					<textarea id="drthai-note" name="contact_note" maxlength="300" rows="4"></textarea>
 				</p>
 			</div>
 
 			<p class="drthai-consent">
 				<label><input type="checkbox" name="contact_consent" value="1" required> Tôi đồng ý để DrThai sử dụng thông tin trên nhằm liên hệ lại theo <a href="/chinh-sach-quyen-rieng-tu/">Chính sách quyền riêng tư</a>.</label>
 			</p>
-			<p class="drthai-form-note">Không nhập triệu chứng, bệnh án hoặc dữ liệu sức khỏe vào biểu mẫu này. Trường hợp khẩn cấp, hãy gọi 115 hoặc đến cơ sở y tế gần nhất.</p>
-			<button class="drthai-submit" type="submit">Gửi yêu cầu gọi lại</button>
+
+			<p class="drthai-form-note">Không nhập triệu chứng chi tiết, bệnh án, kết quả xét nghiệm, ảnh nội soi hoặc dữ liệu sức khỏe nhạy cảm vào biểu mẫu này.</p>
+
+			<button class="drthai-submit" type="submit">Gửi yêu cầu đặt lịch</button>
 		</form>
 	</div>
 	<?php
