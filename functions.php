@@ -329,30 +329,73 @@ function drthai_health_callback_redirect( $status ) {
  * Validate and save callback requests.
  */
 function drthai_health_handle_callback_form() {
-	$nonce = isset( $_POST['drthai_callback_nonce'] ) ? sanitize_text_field( wp_unslash( $_POST['drthai_callback_nonce'] ) ) : '';
+	$get_post_value = static function ( $key ) {
+		return isset( $_POST[ $key ] ) && is_string( $_POST[ $key ] )
+			? wp_unslash( $_POST[ $key ] )
+			: '';
+	};
+
+	$nonce = sanitize_text_field( $get_post_value( 'drthai_callback_nonce' ) );
 	if ( ! wp_verify_nonce( $nonce, 'drthai_callback_submit' ) ) {
 		drthai_health_callback_redirect( 'error' );
 	}
 
-	if ( ! empty( $_POST['company_website'] ) ) {
+	if ( '' !== trim( $get_post_value( 'company_website' ) ) ) {
 		drthai_health_callback_redirect( 'success' );
 	}
 
-	$name    = isset( $_POST['contact_name'] ) ? sanitize_text_field( wp_unslash( $_POST['contact_name'] ) ) : '';
-	$phone   = isset( $_POST['contact_phone'] ) ? sanitize_text_field( wp_unslash( $_POST['contact_phone'] ) ) : '';
-	$email   = isset( $_POST['contact_email'] ) ? sanitize_email( wp_unslash( $_POST['contact_email'] ) ) : '';
-	$time    = isset( $_POST['contact_time'] ) ? sanitize_text_field( wp_unslash( $_POST['contact_time'] ) ) : '';
-	$consent = isset( $_POST['contact_consent'] ) && '1' === (string) $_POST['contact_consent'];
-	$digits  = preg_replace( '/\D+/', '', $phone );
+	$services   = drthai_health_booking_services();
+	$time_slots = drthai_health_booking_time_slots();
 
-	if ( '' === $name || strlen( $name ) > 80 || strlen( $digits ) < 8 || strlen( $digits ) > 15 || ! $consent ) {
+	$name               = sanitize_text_field( $get_post_value( 'contact_name' ) );
+	$phone              = sanitize_text_field( $get_post_value( 'contact_phone' ) );
+	$email_input        = trim( $get_post_value( 'contact_email' ) );
+	$email              = sanitize_email( $email_input );
+	$service_key        = sanitize_key( $get_post_value( 'booking_service' ) );
+	$preferred_date     = sanitize_text_field( $get_post_value( 'preferred_date' ) );
+	$preferred_time_key = sanitize_key( $get_post_value( 'preferred_time' ) );
+	$note               = sanitize_textarea_field( $get_post_value( 'contact_note' ) );
+	$consent            = '1' === $get_post_value( 'contact_consent' );
+
+	if ( '' === $preferred_time_key ) {
+		$preferred_time_key = 'any';
+	}
+
+	$digits      = preg_replace( '/\D+/', '', $phone );
+	$name_length = function_exists( 'mb_strlen' ) ? mb_strlen( $name ) : strlen( $name );
+	$note_length = function_exists( 'mb_strlen' ) ? mb_strlen( $note ) : strlen( $note );
+
+	$date_parts = explode( '-', $preferred_date );
+	$date_valid = 3 === count( $date_parts )
+		&& ctype_digit( $date_parts[0] )
+		&& ctype_digit( $date_parts[1] )
+		&& ctype_digit( $date_parts[2] )
+		&& checkdate( (int) $date_parts[1], (int) $date_parts[2], (int) $date_parts[0] );
+
+	$today = wp_date( 'Y-m-d' );
+
+	if (
+		'' === $name
+		|| $name_length > 80
+		|| strlen( $digits ) < 9
+		|| strlen( $digits ) > 12
+		|| ! isset( $services[ $service_key ] )
+		|| ! isset( $time_slots[ $preferred_time_key ] )
+		|| ! $date_valid
+		|| $preferred_date < $today
+		|| ( '' !== $email_input && ! is_email( $email_input ) )
+		|| $note_length > 300
+		|| ! $consent
+	) {
 		drthai_health_callback_redirect( 'error' );
 	}
 
 	$rate_key = 'drthai_callback_' . md5( $digits . '|' . wp_salt( 'nonce' ) );
+
 	if ( get_transient( $rate_key ) ) {
 		drthai_health_callback_redirect( 'rate' );
 	}
+
 	set_transient( $rate_key, 1, 5 * MINUTE_IN_SECONDS );
 
 	$request_id = wp_insert_post(
@@ -369,15 +412,40 @@ function drthai_health_handle_callback_form() {
 		drthai_health_callback_redirect( 'error' );
 	}
 
+	$service_label = $services[ $service_key ];
+	$time_label    = $time_slots[ $preferred_time_key ];
+	$source_url    = wp_validate_redirect(
+		esc_url_raw( $get_post_value( 'redirect_to' ) ),
+		home_url( '/lien-he/' )
+	);
+
 	update_post_meta( $request_id, '_drthai_name', $name );
 	update_post_meta( $request_id, '_drthai_phone', $phone );
 	update_post_meta( $request_id, '_drthai_email', $email );
-	update_post_meta( $request_id, '_drthai_contact_time', $time );
+	update_post_meta( $request_id, '_drthai_service', $service_label );
+	update_post_meta( $request_id, '_drthai_preferred_date', $preferred_date );
+	update_post_meta( $request_id, '_drthai_preferred_time', $time_label );
+	update_post_meta( $request_id, '_drthai_contact_time', $time_label );
+	update_post_meta( $request_id, '_drthai_note', $note );
 	update_post_meta( $request_id, '_drthai_submitted_at', wp_date( 'd/m/Y H:i:s' ) );
+	update_post_meta( $request_id, '_drthai_consent_at', wp_date( 'Y-m-d H:i:s' ) );
+	update_post_meta( $request_id, '_drthai_source_url', $source_url );
 	update_post_meta( $request_id, '_drthai_consent', '1' );
 
-	$subject = sprintf( '[DrThai] Yêu cầu gọi lại %s', get_the_title( $request_id ) );
-	$message = "Họ tên: {$name}\nSố điện thoại: {$phone}\nEmail: {$email}\nThời gian: {$time}\n";
+	$subject = sprintf( '[DrThai] Yêu cầu đặt lịch %s', get_the_title( $request_id ) );
+
+	$message = sprintf(
+		"Họ tên: %s\nSố điện thoại: %s\nDịch vụ: %s\nNgày mong muốn: %s\nKhung giờ: %s\nEmail: %s\nGhi chú: %s\nNguồn: %s\n",
+		$name,
+		$phone,
+		$service_label,
+		$preferred_date,
+		$time_label,
+		$email ? $email : '—',
+		$note ? $note : '—',
+		$source_url
+	);
+
 	wp_mail( get_option( 'admin_email' ), $subject, $message );
 
 	drthai_health_callback_redirect( 'success' );
