@@ -1,4 +1,12 @@
-DrThai Health 2.0.0 — 01/08/2026
+DrThai Health 1.0.2 — 03/08/2026
+================================
+
+- Sửa Mobile Navigation (điều hướng di động) chỉ hiển thị mục Trang chủ.
+- Hiển thị đầy đủ Trang chủ, Giới thiệu, Chuyên môn, Tin tức và Liên hệ.
+- Bổ sung Overlay Menu (menu phủ màn hình), cuộn dọc và nút đóng trên mobile.
+- Không thay đổi dữ liệu WordPress hoặc cấu trúc nội dung.
+
+DrThai Health 1.0.1 — 01/08/2026
 ================================
 
 - Thiết kế lại toàn bộ theo phong cách kem ấm, xanh đậm và vàng nhấn của

@@ -3,7 +3,7 @@ Theme Name: DrThai Health
 Theme URI: https://drthai.blog/
 Author: DrThai
 Description: Giao diện khối dành cho website bác sĩ chuyên khoa tiêu hóa, có trung tâm tin tức và biểu mẫu yêu cầu gọi lại.
-Version: 1.0.1
+Version: 1.0.2
 Requires at least: 6.6
 Requires PHP: 7.4
 License: GNU General Public License v2 or later
@@ -1349,4 +1349,71 @@ a {
 	.drthai-services-cta > .wp-block-group {
 		border-radius: 20px;
 	}
+}
+
+/* Mobile navigation hotfix — v1.0.2 */
+@media (max-width: 781px) {
+  .drthai-main-nav
+  .wp-block-navigation__responsive-container.is-menu-open {
+    display: flex !important;
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100dvh;
+    max-height: none;
+    overflow-x: hidden;
+    overflow-y: auto;
+    background: var(--wp--preset--color--background, #faf6ee);
+    z-index: 100000;
+  }
+
+  .drthai-main-nav
+  .wp-block-navigation__responsive-container.is-menu-open
+  .wp-block-navigation__responsive-dialog {
+    width: 100%;
+    min-height: 100%;
+  }
+
+  .drthai-main-nav
+  .wp-block-navigation__responsive-container.is-menu-open
+  .wp-block-navigation__responsive-container-content {
+    display: flex !important;
+    width: 100%;
+    padding: 80px 24px 32px;
+    align-items: flex-start;
+    justify-content: flex-start;
+    overflow: visible;
+  }
+
+  .drthai-main-nav
+  .wp-block-navigation__responsive-container.is-menu-open
+  .wp-block-navigation__container {
+    display: flex !important;
+    width: 100%;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: stretch;
+    gap: 0;
+    max-height: none;
+    overflow: visible;
+  }
+
+  .drthai-main-nav
+  .wp-block-navigation__responsive-container.is-menu-open
+  .wp-block-navigation-item {
+    display: block !important;
+    width: 100%;
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+
+  .drthai-main-nav
+  .wp-block-navigation__responsive-container.is-menu-open
+  .wp-block-navigation-item__content {
+    display: block;
+    width: 100%;
+    padding: 14px 4px;
+    border-bottom: 1px solid rgba(14, 92, 82, 0.14);
+    font-size: 1.05rem;
+  }
 }
