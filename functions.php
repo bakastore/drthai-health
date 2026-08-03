@@ -168,6 +168,37 @@ function drthai_health_callback_meta_box_content( $post ) {
 }
 
 /**
+ * Return supported booking services.
+ *
+ * @return array
+ */
+function drthai_health_booking_services() {
+	return array(
+		'kham-tieu-hoa'         => __( 'Khám tiêu hóa', 'drthai-health' ),
+		'da-day-thuc-quan'      => __( 'Tư vấn bệnh lý dạ dày – thực quản', 'drthai-health' ),
+		'dai-truc-trang'        => __( 'Tư vấn đại trực tràng', 'drthai-health' ),
+		'hau-mon-truc-trang'    => __( 'Tư vấn hậu môn – trực tràng', 'drthai-health' ),
+		'noi-soi-tieu-hoa'      => __( 'Nội soi tiêu hóa', 'drthai-health' ),
+		'tu-van-sau-phau-thuat' => __( 'Tư vấn sau phẫu thuật', 'drthai-health' ),
+		'dich-vu-khac'          => __( 'Dịch vụ khác', 'drthai-health' ),
+	);
+}
+
+/**
+ * Return supported preferred time slots.
+ *
+ * @return array
+ */
+function drthai_health_booking_time_slots() {
+	return array(
+		'any'       => __( 'Bất kỳ thời gian phù hợp', 'drthai-health' ),
+		'morning'   => __( 'Buổi sáng', 'drthai-health' ),
+		'afternoon' => __( 'Buổi chiều', 'drthai-health' ),
+		'evening'   => __( 'Buổi tối', 'drthai-health' ),
+	);
+}
+
+/**
  * Output the callback form shortcode.
  *
  * @param array $atts Shortcode attributes.
