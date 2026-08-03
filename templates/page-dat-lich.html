@@ -1,12 +1,105 @@
 <!-- wp:template-part {"slug":"header","tagName":"header"} /-->
-<!-- wp:group {"tagName":"main","align":"full","backgroundColor":"background","className":"drthai-contact-page","style":{"spacing":{"padding":{"bottom":"var:preset|spacing|70"}}},"layout":{"type":"constrained"}} -->
-<main class="wp-block-group alignfull drthai-contact-page has-background-background-color has-background" style="padding-bottom:var(--wp--preset--spacing--70)">
-	<!-- wp:group {"align":"full","className":"drthai-page-hero","style":{"spacing":{"padding":{"top":"var:preset|spacing|60","bottom":"var:preset|spacing|60"}}},"layout":{"type":"constrained"}} -->
-	<div class="wp-block-group alignfull drthai-page-hero" style="padding-top:var(--wp--preset--spacing--60);padding-bottom:var(--wp--preset--spacing--60)"><!-- wp:paragraph {"align":"center","textColor":"primary","className":"drthai-eyebrow"} --><p class="has-text-align-center drthai-eyebrow has-primary-color has-text-color">ĐẶT LỊCH TƯ VẤN</p><!-- /wp:paragraph --><!-- wp:heading {"textAlign":"center","level":1,"fontSize":"x-large"} --><h1 class="wp-block-heading has-text-align-center has-x-large-font-size">Yêu cầu bác sĩ hoặc người hỗ trợ gọi lại</h1><!-- /wp:heading --><!-- wp:paragraph {"align":"center","textColor":"ink-soft","fontSize":"large"} --><p class="has-text-align-center has-ink-soft-color has-text-color has-large-font-size">Biểu mẫu không xác nhận lịch tự động. Thời gian và địa điểm sẽ được thống nhất qua điện thoại.</p><!-- /wp:paragraph --></div>
-	<!-- /wp:group -->
-	<!-- wp:group {"align":"wide","style":{"spacing":{"padding":{"top":"var:preset|spacing|60"}}},"layout":{"type":"constrained"}} -->
-	<div class="wp-block-group alignwide" style="padding-top:var(--wp--preset--spacing--60)"><!-- wp:shortcode -->[drthai_callback_form]<!-- /wp:shortcode --></div>
-	<!-- /wp:group -->
+
+<!-- wp:group {"tagName":"main","className":"drthai-booking-page","layout":{"type":"default"}} -->
+<main class="wp-block-group drthai-booking-page">
+
+<!-- wp:group {"align":"full","className":"drthai-booking-hero","layout":{"type":"constrained"}} -->
+<div class="wp-block-group alignfull drthai-booking-hero">
+<!-- wp:paragraph {"className":"drthai-page-eyebrow"} -->
+<p class="drthai-page-eyebrow">Yêu cầu đặt lịch khám</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":1} -->
+<h1 class="wp-block-heading">Chủ động chọn thời gian phù hợp</h1>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph {"className":"drthai-page-lead"} -->
+<p class="drthai-page-lead">Điền thông tin ngắn gọn dưới đây. Yêu cầu sẽ được tiếp nhận và liên hệ lại để xác nhận lịch khám.</p>
+<!-- /wp:paragraph -->
+</div>
+<!-- /wp:group -->
+
+<!-- wp:group {"className":"drthai-booking-shell","layout":{"type":"constrained"}} -->
+<div class="wp-block-group drthai-booking-shell">
+
+<!-- wp:columns {"className":"drthai-booking-layout"} -->
+<div class="wp-block-columns drthai-booking-layout">
+
+<!-- wp:column {"width":"36%"} -->
+<div class="wp-block-column" style="flex-basis:36%">
+
+<!-- wp:group {"className":"drthai-booking-guide","layout":{"type":"constrained"}} -->
+<div class="wp-block-group drthai-booking-guide">
+<!-- wp:heading {"level":2,"fontSize":"large"} -->
+<h2 class="wp-block-heading has-large-font-size">Quy trình tiếp nhận</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list {"ordered":true,"className":"drthai-booking-steps"} -->
+<ol class="drthai-booking-steps">
+<li>Gửi thông tin yêu cầu.</li>
+<li>Nhân viên liên hệ xác nhận.</li>
+<li>Thống nhất ngày và khung giờ khám.</li>
+</ol>
+<!-- /wp:list -->
+
+<!-- wp:separator -->
+<hr class="wp-block-separator has-alpha-channel-opacity"/>
+<!-- /wp:separator -->
+
+<!-- wp:heading {"level":3,"fontSize":"medium"} -->
+<h3 class="wp-block-heading has-medium-font-size">Cần hỗ trợ trực tiếp?</h3>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Gọi số <strong>0977 703 663</strong> để được hỗ trợ nhanh.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:buttons -->
+<div class="wp-block-buttons">
+<!-- wp:button {"className":"drthai-button-call"} -->
+<div class="wp-block-button drthai-button-call"><a class="wp-block-button__link wp-element-button" href="tel:0977703663">Gọi ngay</a></div>
+<!-- /wp:button -->
+</div>
+<!-- /wp:buttons -->
+</div>
+<!-- /wp:group -->
+
+</div>
+<!-- /wp:column -->
+
+<!-- wp:column {"width":"64%"} -->
+<div class="wp-block-column" style="flex-basis:64%">
+
+<!-- wp:group {"className":"drthai-booking-form-card","layout":{"type":"constrained"}} -->
+<div class="wp-block-group drthai-booking-form-card">
+<!-- wp:heading {"level":2,"fontSize":"large"} -->
+<h2 class="wp-block-heading has-large-font-size">Thông tin đặt lịch</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph {"className":"drthai-form-note"} -->
+<p class="drthai-form-note">Các trường có dấu * là bắt buộc. Đây là yêu cầu đặt lịch và chưa phải lịch hẹn đã được xác nhận.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:shortcode -->
+[drthai_callback_form]
+<!-- /wp:shortcode -->
+</div>
+<!-- /wp:group -->
+
+</div>
+<!-- /wp:column -->
+
+</div>
+<!-- /wp:columns -->
+
+<!-- wp:paragraph {"className":"drthai-privacy-note"} -->
+<p class="drthai-privacy-note">Không gửi hồ sơ bệnh án, ảnh nội soi hoặc dữ liệu sức khỏe nhạy cảm qua biểu mẫu công khai.</p>
+<!-- /wp:paragraph -->
+
+</div>
+<!-- /wp:group -->
+
 </main>
 <!-- /wp:group -->
+
 <!-- wp:template-part {"slug":"footer","tagName":"footer"} /-->
