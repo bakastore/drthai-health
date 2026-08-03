@@ -60,9 +60,9 @@ function drthai_health_register_callback_post_type() {
 		'drthai_callback',
 		array(
 			'labels' => array(
-				'name'          => __( 'Yêu cầu gọi lại', 'drthai-health' ),
-				'singular_name' => __( 'Yêu cầu gọi lại', 'drthai-health' ),
-				'menu_name'     => __( 'Yêu cầu gọi lại', 'drthai-health' ),
+				'name'          => __( 'Yêu cầu đặt lịch', 'drthai-health' ),
+				'singular_name' => __( 'Yêu cầu đặt lịch', 'drthai-health' ),
+				'menu_name'     => __( 'Yêu cầu đặt lịch', 'drthai-health' ),
 				'all_items'     => __( 'Tất cả yêu cầu', 'drthai-health' ),
 				'edit_item'     => __( 'Xem yêu cầu', 'drthai-health' ),
 			),
@@ -72,7 +72,7 @@ function drthai_health_register_callback_post_type() {
 			'show_ui'             => true,
 			'show_in_menu'        => true,
 			'show_in_rest'        => false,
-			'menu_icon'           => 'dashicons-phone',
+			'menu_icon'           => 'dashicons-calendar-alt',
 			'supports'            => array( 'title' ),
 			'capabilities'        => array(
 				'edit_post'          => 'manage_options',
@@ -85,9 +85,9 @@ function drthai_health_register_callback_post_type() {
 				'read_private_posts' => 'manage_options',
 				'create_posts'       => 'do_not_allow',
 			),
-			'map_meta_cap'        => false,
-			'has_archive'         => false,
-			'rewrite'             => false,
+			'map_meta_cap' => false,
+			'has_archive'  => false,
+			'rewrite'      => false,
 		)
 	);
 }
@@ -101,12 +101,14 @@ add_action( 'init', 'drthai_health_register_callback_post_type' );
  */
 function drthai_health_callback_columns( $columns ) {
 	return array(
-		'cb'           => $columns['cb'],
-		'title'        => __( 'Mã yêu cầu', 'drthai-health' ),
-		'contact_name' => __( 'Họ và tên', 'drthai-health' ),
-		'phone'        => __( 'Số điện thoại', 'drthai-health' ),
-		'contact_time' => __( 'Thời gian mong muốn', 'drthai-health' ),
-		'date'         => __( 'Ngày gửi', 'drthai-health' ),
+		'cb'             => $columns['cb'],
+		'title'          => __( 'Mã yêu cầu', 'drthai-health' ),
+		'contact_name'   => __( 'Họ và tên', 'drthai-health' ),
+		'phone'          => __( 'Số điện thoại', 'drthai-health' ),
+		'service'        => __( 'Dịch vụ', 'drthai-health' ),
+		'preferred_date' => __( 'Ngày mong muốn', 'drthai-health' ),
+		'preferred_time' => __( 'Khung giờ', 'drthai-health' ),
+		'date'           => __( 'Ngày gửi', 'drthai-health' ),
 	);
 }
 add_filter( 'manage_drthai_callback_posts_columns', 'drthai_health_callback_columns' );
@@ -118,14 +120,36 @@ add_filter( 'manage_drthai_callback_posts_columns', 'drthai_health_callback_colu
  * @param int    $post_id Request ID.
  */
 function drthai_health_callback_column_content( $column, $post_id ) {
-	if ( 'contact_name' === $column ) {
-		echo esc_html( get_post_meta( $post_id, '_drthai_name', true ) );
+	$value = null;
+
+	switch ( $column ) {
+		case 'contact_name':
+			$value = get_post_meta( $post_id, '_drthai_name', true );
+			break;
+
+		case 'phone':
+			$value = get_post_meta( $post_id, '_drthai_phone', true );
+			break;
+
+		case 'service':
+			$value = get_post_meta( $post_id, '_drthai_service', true );
+			break;
+
+		case 'preferred_date':
+			$value = get_post_meta( $post_id, '_drthai_preferred_date', true );
+			break;
+
+		case 'preferred_time':
+			$value = get_post_meta( $post_id, '_drthai_preferred_time', true );
+
+			if ( '' === $value ) {
+				$value = get_post_meta( $post_id, '_drthai_contact_time', true );
+			}
+			break;
 	}
-	if ( 'phone' === $column ) {
-		echo esc_html( get_post_meta( $post_id, '_drthai_phone', true ) );
-	}
-	if ( 'contact_time' === $column ) {
-		echo esc_html( get_post_meta( $post_id, '_drthai_contact_time', true ) );
+
+	if ( null !== $value ) {
+		echo esc_html( '' !== $value ? $value : '—' );
 	}
 }
 add_action( 'manage_drthai_callback_posts_custom_column', 'drthai_health_callback_column_content', 10, 2 );
@@ -151,22 +175,33 @@ add_action( 'add_meta_boxes', 'drthai_health_callback_meta_box' );
  * @param WP_Post $post Request post.
  */
 function drthai_health_callback_meta_box_content( $post ) {
+	$preferred_time = get_post_meta( $post->ID, '_drthai_preferred_time', true );
+
+	if ( '' === $preferred_time ) {
+		$preferred_time = get_post_meta( $post->ID, '_drthai_contact_time', true );
+	}
+
 	$fields = array(
-		'_drthai_name'         => __( 'Họ và tên', 'drthai-health' ),
-		'_drthai_phone'        => __( 'Số điện thoại', 'drthai-health' ),
-		'_drthai_email'        => __( 'Email', 'drthai-health' ),
-		'_drthai_contact_time' => __( 'Thời gian mong muốn', 'drthai-health' ),
-		'_drthai_submitted_at' => __( 'Thời điểm gửi', 'drthai-health' ),
+		__( 'Họ và tên', 'drthai-health' )          => get_post_meta( $post->ID, '_drthai_name', true ),
+		__( 'Số điện thoại', 'drthai-health' )       => get_post_meta( $post->ID, '_drthai_phone', true ),
+		__( 'Email', 'drthai-health' )               => get_post_meta( $post->ID, '_drthai_email', true ),
+		__( 'Dịch vụ', 'drthai-health' )             => get_post_meta( $post->ID, '_drthai_service', true ),
+		__( 'Ngày mong muốn', 'drthai-health' )      => get_post_meta( $post->ID, '_drthai_preferred_date', true ),
+		__( 'Khung giờ mong muốn', 'drthai-health' ) => $preferred_time,
+		__( 'Ghi chú liên hệ', 'drthai-health' )     => get_post_meta( $post->ID, '_drthai_note', true ),
+		__( 'Thời điểm gửi', 'drthai-health' )       => get_post_meta( $post->ID, '_drthai_submitted_at', true ),
+		__( 'Thời điểm đồng ý', 'drthai-health' )    => get_post_meta( $post->ID, '_drthai_consent_at', true ),
+		__( 'Trang gửi yêu cầu', 'drthai-health' )   => get_post_meta( $post->ID, '_drthai_source_url', true ),
 	);
 
 	echo '<table class="widefat striped"><tbody>';
-	foreach ( $fields as $key => $label ) {
-		$value = get_post_meta( $post->ID, $key, true );
-		echo '<tr><th style="width:190px">' . esc_html( $label ) . '</th><td>' . esc_html( $value ? $value : '—' ) . '</td></tr>';
+
+	foreach ( $fields as $label => $value ) {
+		echo '<tr><th style="width:190px">' . esc_html( $label ) . '</th><td>' . esc_html( '' !== $value ? $value : '—' ) . '</td></tr>';
 	}
+
 	echo '</tbody></table>';
 }
-
 /**
  * Return supported booking services.
  *
