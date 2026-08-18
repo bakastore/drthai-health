@@ -107,6 +107,10 @@ For an Owner-approved development mission, complete the full coherent mission wi
 
 Do not pause for routine choices such as file placement, naming, hook selection, small refactors or test organization when they are reversible and within scope.
 
+### Review-gated missions
+
+When a Mission Contract explicitly marks a gate `REVIEW_REQUIRED`, that review point is a hard stop. Codex may complete implementation, testing and evidence collection up to the gate, but must not advance to the next gated phase or build a release artifact until the required Owner or reviewer verdict is recorded as PASS. Do not infer `REVIEW_REQUIRED` for routine missions unless the Mission Contract explicitly declares it.
+
 ## 8. Self-repair authority
 
 Within an approved mission, Codex may autonomously:
