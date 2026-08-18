@@ -28,6 +28,21 @@ function drthai_health_setup() {
 add_action( 'after_setup_theme', 'drthai_health_setup' );
 
 /**
+ * Let Yoast remain the single document-title renderer when it is active.
+ *
+ * WordPress 7.0 retains the Core title callback alongside Yoast 28.3, which
+ * otherwise produces two title elements. Native title rendering remains the
+ * fallback whenever Yoast is inactive.
+ */
+function drthai_health_defer_document_title_to_yoast() {
+	if ( defined( 'WPSEO_VERSION' ) ) {
+		remove_action( 'wp_head', '_wp_render_title_tag', 1 );
+		remove_action( 'wp_head', '_block_template_render_title_tag', 1 );
+	}
+}
+add_action( 'wp_head', 'drthai_health_defer_document_title_to_yoast', 0 );
+
+/**
  * Load the front-end stylesheet.
  */
 function drthai_health_enqueue_styles() {

@@ -5,7 +5,7 @@ Purpose: Current factual state of the project
 
 Last updated: 2026-08-18
 Current development version: 1.2.0
-Current phase: Content Operations 1.2 — C2 WordPress Admin Experience
+Current phase: Content Operations 1.2 — C5 SEO & Discovery
 Production deployment: DEFERRED
 
 ---
@@ -39,7 +39,7 @@ Repository:
 
 Current branch:
 
-feature/content-ops-1.2-c2
+feature/content-ops-1.2-c5
 
 Last confirmed Local Development Release commit:
 
@@ -383,6 +383,24 @@ Implemented and verified:
 - The 60-check C4 suite passed at a 180-Post synthetic scale, including state precedence, SQL-bounded filters, pagination, display, C1 reset path, fixture cleanup, and existing-content integrity.
 - C1, C2, and C3 regression suites passed. Content Engine HTTP and Booking protected-boundary checks passed.
 - Packaging Validator passed with 35 runtime files, 15 runtime PHP files, and zero unclassified files.
+- Production remains DEFERRED and UNTOUCHED.
+
+### C5 SEO & Discovery
+
+Status: PASS (Local Development)
+
+Branch: `feature/content-ops-1.2-c5`
+
+Implemented and verified:
+
+- Yoast SEO Free is the single active SEO layer. The Local plugin slug is `wordpress-seo`, tested at version 28.3 on WordPress 7.0.4 and PHP 8.3.33.
+- Official plugin metadata requires WordPress 6.9 and PHP 7.4 and reports Tested Up To WordPress 7.1. Local compatibility testing passed without a version-lag caveat; Production Predeploy must re-check current supported versions.
+- Yoast owns SEO titles, Meta Descriptions, indexation metadata, canonical behavior, XML sitemap, Open Graph, social metadata, and the Article/WebPage Schema graph. A minimal conditional theme shim removes WordPress 7.0's duplicate block-theme title renderer only while Yoast is active.
+- Local indexing is disabled with `blog_public=0`. Yoast appropriately emits noindex output and suppresses Local frontend canonicals; Production canonical URLs and indexing must be verified only during approved Production work.
+- `/sitemap_index.xml` returns valid XML with Post, Page, Category, and Tag coverage. `/wp-sitemap.xml` redirects to Yoast, so no independent second sitemap layer remains.
+- `docs/SEO_STANDARD.md` documents the editor workflow, Featured Image/social relationship, taxonomy and internal-linking practices, AI restrictions, and Production Search Console readiness. No external account or verification property was connected.
+- The 67-check C5 suite passed with custom title/description, Open Graph, Schema, sitemap dynamics, C1/C3/C4 integration, and complete synthetic fixture cleanup. C1, C2, C3, and C4 regressions passed.
+- Content Engine HTTP and Booking boundary checks passed. Packaging Validator passed with 35 runtime files, 15 runtime PHP files, and zero unclassified files.
 - Production remains DEFERRED and UNTOUCHED.
 
 ---
