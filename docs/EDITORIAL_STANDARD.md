@@ -43,6 +43,15 @@ Every public Single Post automatically displays the theme Medical Disclaimer aft
 
 Follow `docs/MEDIA_STANDARD.md` for filename, Featured Image, Alt Text, patient-data, format, size, reuse, and rights guidance. A valid Featured Image with meaningful Alt Text is required before a Draft or Pending Post can be Published or Scheduled.
 
+## Managing Articles in WordPress
+
+1. Open **Posts → All Posts**. Use the native Title, Author, Categories, and Date information together with the Medical Review, Reviewed, Media, Updated, and Editorial Health columns.
+2. Read **Editorial Health** first. `OK` identifies complete Published/Scheduled content, `READY` identifies a complete unpublished Post, and `NEEDS ATTENTION` lists the specific items to fix.
+3. Use **Needs Attention** to find incomplete articles, then use **Chưa rà soát**, **Thiếu Featured Image**, or **Thiếu Alt Text** to narrow the work.
+4. Use the Reviewer filter to find articles reviewed by a particular person. Continue using WordPress native Category, Status, Author, Date, and Search controls where appropriate.
+5. Open the Post and correct the reported items through the normal editor, Media Library, and Medical Review action. C2 list columns and filters are read-only.
+6. Return to **All Posts**, repeat the relevant filter, and confirm the row now shows the expected `READY` or `OK` state.
+
 ## Existing-content grandfather rule
 
 Existing published Posts remain published even if they predate Medical Review metadata. C1 does not fabricate historical reviewers or reviewed dates, unpublish legacy content, or invalidate review metadata after later edits. Content lifecycle and material-change policy belong to C4.

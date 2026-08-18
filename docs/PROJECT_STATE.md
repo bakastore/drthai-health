@@ -5,7 +5,7 @@ Purpose: Current factual state of the project
 
 Last updated: 2026-08-18
 Current development version: 1.2.0
-Current phase: Content Operations 1.2 — C3 Media Governance
+Current phase: Content Operations 1.2 — C2 WordPress Admin Experience
 Production deployment: DEFERRED
 
 ---
@@ -39,7 +39,7 @@ Repository:
 
 Current branch:
 
-feature/content-ops-1.2-c3
+feature/content-ops-1.2-c2
 
 Last confirmed Local Development Release commit:
 
@@ -349,6 +349,23 @@ Implemented and verified:
 - Identifiable patient media is prohibited and a concise native Media Library notice reminds upload-capable users of the rule; no automated detection claim or scanning system was introduced.
 - The 52-check C3 Local integration suite and 61-check C1 suite passed with synthetic media cleanup and existing Post, Attachment, Featured Image, Alt Text, filename, and trusted SVG integrity verification.
 - Packaging Validator passed with 33 runtime files, 13 runtime PHP files, and zero unclassified files.
+- Production remains DEFERRED and UNTOUCHED.
+
+### C2 WordPress Admin Experience
+
+Status: PASS (Local Development)
+
+Branch: `feature/content-ops-1.2-c2`
+
+Implemented and verified:
+
+- The native Posts List Table now adds Medical Review, Reviewed Date, Media, Updated Date, and Editorial Health columns while preserving useful WordPress columns and row actions.
+- Read-only filters cover review status, actual recorded reviewers, media completeness, and Editorial Health; native Status, Category, Date, Author, and Search behavior remains available.
+- Editorial Health is derived dynamically from C1/C3 review and media validity plus Excerpt and meaningful Category checks; no workflow status, health metadata, cache table, or bulk mutation path was added.
+- Updated Date and Reviewed Date sorting use native query data and bounded SQL clauses without loading the full Posts collection into PHP.
+- The 65-check C2 suite passed at a 120-Post synthetic scale with pagination, filter interoperability, security, and complete fixture-cleanup verification.
+- C1 (61 checks) and C3 (52 checks) regression suites passed.
+- Packaging Validator passed with 34 runtime files, 14 runtime PHP files, and zero unclassified files.
 - Production remains DEFERRED and UNTOUCHED.
 
 ---
