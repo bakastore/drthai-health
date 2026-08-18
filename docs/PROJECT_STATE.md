@@ -5,7 +5,7 @@ Purpose: Current factual state of the project
 
 Last updated: 2026-08-18
 Current development version: 1.2.0
-Current phase: Content Operations 1.2 — C5 SEO & Discovery
+Current phase: UI-UX 2.0 — Public Experience Polish
 Production deployment: DEFERRED
 
 ---
@@ -39,7 +39,7 @@ Repository:
 
 Current branch:
 
-feature/content-ops-1.2-c5
+feature/ui-ux-2.0-public-polish
 
 Last confirmed Local Development Release commit:
 
@@ -426,7 +426,27 @@ Prefer native WordPress capabilities whenever practical.
 
 ---
 
-## 14. Production Status
+## 14. UI-UX 2.0 — Public Experience Polish
+
+Status:
+
+PASS / OWNER ACCEPTANCE PENDING
+
+Verified locally on 2026-08-18:
+
+- actual rendered visual audit covered Home, News, Single Post, Category, Tag, Search, 404, About, Expertise, Contact, and Booking;
+- shared typography, article reading, discovery cards, search, CTA, form, and footer presentation were polished;
+- responsive checks passed at 320, 390, 768, and 1440 pixel viewport widths with no page-level horizontal overflow;
+- native mobile navigation open/close presentation, keyboard focus, and practical touch targets passed;
+- C1–C5 targeted regression, protected Booking boundary, SEO runtime, and Content Engine routing passed;
+- Packaging Policy and Validator passed with zero unclassified files;
+- Production remained deferred and untouched.
+
+Durable public experience rules are documented in `docs/PUBLIC_EXPERIENCE_STANDARD.md`.
+
+---
+
+## 15. Production Status
 
 Production work is currently DEFERRED.
 
@@ -445,26 +465,17 @@ No Production mutation without explicit Owner approval.
 
 ---
 
-## 15. Next Mission
+## 16. Next Mission
 
 Next Mission:
 
-CONTENT-OPS-1.2
+OWNER_UI_UX_2_0_ACCEPTANCE
 
-Focus:
-
-1. Editorial architecture
-2. Content metadata
-3. WordPress administration experience
-4. Media governance
-5. Content lifecycle
-6. SEO and content discovery
-
-Do not prioritize public visual redesign yet.
+UI-UX 2.0 implementation is complete locally; Owner acceptance is the next action.
 
 ---
 
-## 16. Maintenance Rules
+## 17. Maintenance Rules
 
 This file represents factual current project state.
 
