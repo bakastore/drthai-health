@@ -4,8 +4,8 @@ Status: CODEX-MAINTAINABLE
 Purpose: Current factual state of the project
 
 Last updated: 2026-08-18
-Current development version: 1.1.0
-Current phase: Content Operations preparation
+Current development version: 1.2.0
+Current phase: Content Operations 1.2 — C1 Editorial Architecture
 Production deployment: DEFERRED
 
 ---
@@ -39,7 +39,7 @@ Repository:
 
 Current branch:
 
-feature/content-engine-1.1.0
+feature/content-ops-1.2-c1
 
 Last confirmed Local Development Release commit:
 
@@ -318,6 +318,21 @@ Draft
 → Scheduled or Published
 → Update
 → Periodic Review
+
+### C1 Editorial Architecture
+
+Status: PASS (Local Development)
+
+Implemented and verified:
+
+- Standard WordPress Posts remain the article model; no custom article Post Type or workflow status was added.
+- Medical review uses the dedicated `drthai_review_medical_content` capability, granted to Administrators by default and assignable to individual users by an Administrator.
+- Protected `drthai_medical_reviewer` and `drthai_reviewed_at` metadata record the authorized current user and a server-generated UTC timestamp.
+- Unreviewed Draft and Pending Posts are blocked server-side from both Publish and Schedule transitions, including REST/Gutenberg requests; existing published Posts are grandfathered.
+- Every Single Post receives one automatic disclaimer from `templates/single.html`; archive and search templates are unchanged.
+- Newly created Posts default Comments to closed; existing Posts and comment settings were not mass-mutated.
+- The 61-check C1 Local integration suite passed with synthetic data cleanup and existing-content integrity verification.
+- Production remains DEFERRED and UNTOUCHED.
 
 ---
 

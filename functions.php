@@ -10,6 +10,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 require_once __DIR__ . '/inc/theme-setup.php';
+require_once __DIR__ . '/inc/editorial-workflow.php';
 
 /**
  * Register private callback requests in the dashboard.
