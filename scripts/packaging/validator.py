@@ -19,6 +19,7 @@ from policy import (
     DENY_EXACT,
     DENY_SUFFIXES,
     DENY_TREES,
+    DENIED_TREE_ANCHOR,
     POLICY_VERSION,
     REQUIRED_FILES,
 )
@@ -56,7 +57,9 @@ def _in_allow_tree(path: str) -> bool:
 
 def _deny_tree_boundary(path: str) -> bool:
     parts = _parts(path)
-    return bool(parts) and (parts[0] in DENY_TREES or any(p == "__pycache__" for p in parts))
+    root_tree_denied = bool(parts) and parts[0] in DENY_TREES
+    nested_cache_denied = any(part == "__pycache__" for part in parts)
+    return root_tree_denied or nested_cache_denied
 
 
 def _repository_metadata(path: str) -> bool:
@@ -202,6 +205,7 @@ def validate(root: Path) -> ValidationResult:
 def render_report(result: ValidationResult) -> str:
     lines = [
         f"POLICY_VERSION={POLICY_VERSION}",
+        f"DENIED_TREE_ANCHOR={DENIED_TREE_ANCHOR}",
         "VALIDATION=PASS",
         f"CURRENT_RUNTIME_FILE_COUNT={len(result.runtime)}",
         "UNCLASSIFIED_FILES=NONE",

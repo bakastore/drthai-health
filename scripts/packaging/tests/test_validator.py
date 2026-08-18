@@ -160,5 +160,16 @@ class ValidatorTests(unittest.TestCase):
         result = validate(root)
         self.assertEqual(sorted(result.php_files), result.php_files)
         self.assertEqual(result.php_files, validate(root).php_files)
+
+    def test_22_denied_trees_are_anchored_to_repository_root(self):
+        root = self.fixture()
+        nested_files = ("assets/scripts/main.js", "assets/docs/example.json")
+        for rel in nested_files:
+            path = root / rel
+            path.parent.mkdir(parents=True, exist_ok=True)
+            path.write_text(rel + "\n", encoding="utf-8")
+        result = validate(root)
+        for rel in nested_files:
+            self.assertIn(rel, result.runtime)
 if __name__ == "__main__":
     unittest.main(verbosity=2)

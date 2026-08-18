@@ -1,6 +1,7 @@
 """Packaging Policy v0.2 for the DrThai Health runtime theme artifact."""
 
 POLICY_VERSION = "v0.2"
+DENIED_TREE_ANCHOR = "REPOSITORY_ROOT"
 
 ALLOW_EXACT = {
     "functions.php",
