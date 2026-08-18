@@ -5,7 +5,7 @@ Purpose: Current factual state of the project
 
 Last updated: 2026-08-18
 Current development version: 1.2.0
-Current phase: Content Operations 1.2 — C1 Editorial Architecture
+Current phase: Content Operations 1.2 — C3 Media Governance
 Production deployment: DEFERRED
 
 ---
@@ -39,7 +39,7 @@ Repository:
 
 Current branch:
 
-feature/content-ops-1.2-c1
+feature/content-ops-1.2-c3
 
 Last confirmed Local Development Release commit:
 
@@ -332,6 +332,23 @@ Implemented and verified:
 - Every Single Post receives one automatic disclaimer from `templates/single.html`; archive and search templates are unchanged.
 - Newly created Posts default Comments to closed; existing Posts and comment settings were not mass-mutated.
 - The 61-check C1 Local integration suite passed with synthetic data cleanup and existing-content integrity verification.
+- Production remains DEFERRED and UNTOUCHED.
+
+### C3 Media Governance
+
+Status: PASS (Local Development)
+
+Branch: `feature/content-ops-1.2-c3`
+
+Implemented and verified:
+
+- Native WordPress Attachments and the Media Library remain the media system.
+- A valid Featured Image with meaningful, non-empty Attachment Alt Text is required when an unpublished Post enters Publish or Schedule.
+- The media requirement is enforced together with C1 Medical Review for REST/Gutenberg and normal WordPress Post API transitions; existing Published Posts are grandfathered.
+- `docs/MEDIA_STANDARD.md` documents filenames, Featured Images, Alt Text, body-image accessibility, formats, practical sizes based on current responsive image behavior, reuse, publishing rights, and replacement workflow.
+- Identifiable patient media is prohibited and a concise native Media Library notice reminds upload-capable users of the rule; no automated detection claim or scanning system was introduced.
+- The 52-check C3 Local integration suite and 61-check C1 suite passed with synthetic media cleanup and existing Post, Attachment, Featured Image, Alt Text, filename, and trusted SVG integrity verification.
+- Packaging Validator passed with 33 runtime files, 13 runtime PHP files, and zero unclassified files.
 - Production remains DEFERRED and UNTOUCHED.
 
 ---

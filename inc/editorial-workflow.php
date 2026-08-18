@@ -352,11 +352,33 @@ function drthai_health_editorial_admin_notices() {
 	if ( isset( $_GET['drthai_reviewed'] ) && '1' === sanitize_text_field( wp_unslash( $_GET['drthai_reviewed'] ) ) ) {
 		echo '<div class="notice notice-success is-dismissible"><p>' . esc_html__( 'Medical Review recorded.', 'drthai-health' ) . '</p></div>';
 	}
-	if ( isset( $_GET['drthai_review_required'] ) && '1' === sanitize_text_field( wp_unslash( $_GET['drthai_review_required'] ) ) ) {
-		echo '<div class="notice notice-error"><p>' . esc_html__( 'Publishing or scheduling was blocked. Mark this Post as medically reviewed, then try again.', 'drthai-health' ) . '</p></div>';
+	if ( isset( $_GET['drthai_publish_blocked'] ) ) {
+		$blocked_reason = sanitize_key( wp_unslash( $_GET['drthai_publish_blocked'] ) );
+		$messages       = array(
+			'drthai_medical_review_required' => __( 'Publishing or scheduling was blocked. Mark this Post as medically reviewed, then try again.', 'drthai-health' ),
+			'drthai_featured_image_required'  => __( 'Publishing or scheduling was blocked. Assign a valid Featured Image, then try again.', 'drthai-health' ),
+			'drthai_featured_image_alt_required' => __( 'Publishing or scheduling was blocked. Add meaningful Alt Text to the Featured Image, then try again.', 'drthai-health' ),
+		);
+
+		if ( isset( $messages[ $blocked_reason ] ) ) {
+			echo '<div class="notice notice-error"><p>' . esc_html( $messages[ $blocked_reason ] ) . '</p></div>';
+		}
 	}
 }
 add_action( 'admin_notices', 'drthai_health_editorial_admin_notices' );
+
+/**
+ * Remind Media Library users not to upload identifiable patient data.
+ */
+function drthai_health_media_safety_notice() {
+	$screen = get_current_screen();
+	if ( ! $screen || ! in_array( $screen->id, array( 'upload', 'media' ), true ) || ! current_user_can( 'upload_files' ) ) {
+		return;
+	}
+
+	echo '<div class="notice notice-info"><p><strong>' . esc_html__( 'Media safety:', 'drthai-health' ) . '</strong> ' . esc_html__( 'Do not upload images or documents containing identifiable patient information. Verify usage rights and add meaningful Alt Text before publishing.', 'drthai-health' ) . '</p></div>';
+}
+add_action( 'admin_notices', 'drthai_health_media_safety_notice' );
 
 /**
  * Identify a transition from a safe unpublished state into publication.
@@ -373,6 +395,59 @@ function drthai_health_is_publication_transition( $post_id, $target_status ) {
 	$previous_status = $post_id ? get_post_status( $post_id ) : false;
 
 	return ! in_array( $previous_status, array( 'publish', 'future' ), true );
+}
+
+/**
+ * Validate the Featured Image and its Alt Text for publication.
+ *
+ * @param int      $post_id              Post ID.
+ * @param int|null $candidate_thumbnail  Candidate attachment ID, or null to use the stored Featured Image.
+ * @return true|WP_Error
+ */
+function drthai_health_validate_publication_media( $post_id, $candidate_thumbnail = null ) {
+	$thumbnail_id = null === $candidate_thumbnail
+		? absint( get_post_thumbnail_id( $post_id ) )
+		: absint( $candidate_thumbnail );
+
+	if ( ! $thumbnail_id || 'attachment' !== get_post_type( $thumbnail_id ) || ! wp_attachment_is_image( $thumbnail_id ) ) {
+		return new WP_Error(
+			'drthai_featured_image_required',
+			__( 'A valid Featured Image is required before this Post can be published or scheduled.', 'drthai-health' )
+		);
+	}
+
+	$alt_text = trim( wp_strip_all_tags( (string) get_post_meta( $thumbnail_id, '_wp_attachment_image_alt', true ) ) );
+	if ( '' === $alt_text ) {
+		return new WP_Error(
+			'drthai_featured_image_alt_required',
+			__( 'Add meaningful Alt Text to the Featured Image before publishing or scheduling this Post.', 'drthai-health' )
+		);
+	}
+
+	return true;
+}
+
+/**
+ * Validate all C1 and C3 requirements for a publication transition.
+ *
+ * @param int      $post_id             Post ID.
+ * @param string   $target_status       Requested status.
+ * @param int|null $candidate_thumbnail Candidate attachment ID, or null to use the stored Featured Image.
+ * @return true|WP_Error
+ */
+function drthai_health_validate_publication_transition( $post_id, $target_status, $candidate_thumbnail = null ) {
+	if ( ! drthai_health_is_publication_transition( $post_id, $target_status ) ) {
+		return true;
+	}
+
+	if ( ! drthai_health_post_has_valid_medical_review( $post_id ) ) {
+		return new WP_Error(
+			'drthai_medical_review_required',
+			__( 'Medical Review is required before this Post can be published or scheduled.', 'drthai-health' )
+		);
+	}
+
+	return drthai_health_validate_publication_media( $post_id, $candidate_thumbnail );
 }
 
 /**
@@ -394,16 +469,28 @@ function drthai_health_enforce_editorial_workflow( $data, $postarr, $unsanitized
 		$data['comment_status'] = 'closed';
 	}
 
-	if ( drthai_health_is_publication_transition( $post_id, $data['post_status'] )
-		&& ! drthai_health_post_has_valid_medical_review( $post_id ) ) {
+	$candidate_thumbnail = null;
+	if ( isset( $unsanitized_postarr['meta_input'] )
+		&& is_array( $unsanitized_postarr['meta_input'] )
+		&& array_key_exists( '_thumbnail_id', $unsanitized_postarr['meta_input'] ) ) {
+		$candidate_thumbnail = absint( $unsanitized_postarr['meta_input']['_thumbnail_id'] );
+	} elseif ( isset( $GLOBALS['drthai_health_rest_candidate_thumbnails'] )
+		&& is_array( $GLOBALS['drthai_health_rest_candidate_thumbnails'] )
+		&& array_key_exists( $post_id, $GLOBALS['drthai_health_rest_candidate_thumbnails'] ) ) {
+		$candidate_thumbnail = absint( $GLOBALS['drthai_health_rest_candidate_thumbnails'][ $post_id ] );
+		unset( $GLOBALS['drthai_health_rest_candidate_thumbnails'][ $post_id ] );
+	}
+
+	$validation = drthai_health_validate_publication_transition( $post_id, $data['post_status'], $candidate_thumbnail );
+	if ( is_wp_error( $validation ) ) {
 		$previous_status     = $post_id ? get_post_status( $post_id ) : false;
 		$data['post_status'] = in_array( $previous_status, array( 'draft', 'pending', 'private' ), true ) ? $previous_status : 'draft';
 
-		$GLOBALS['drthai_health_publication_blocked'] = true;
+		$GLOBALS['drthai_health_publication_blocked'] = $validation->get_error_code();
 		do_action( 'drthai_health_publication_blocked', $post_id, $postarr, $unsanitized_postarr );
 
 		if ( defined( 'WP_CLI' ) && WP_CLI ) {
-			WP_CLI::warning( 'Publishing or scheduling was blocked: Medical Review is required.' );
+			WP_CLI::warning( $validation->get_error_message() );
 		}
 	}
 
@@ -419,7 +506,7 @@ add_filter( 'wp_insert_post_data', 'drthai_health_enforce_editorial_workflow', 2
  */
 function drthai_health_add_publication_block_notice( $location ) {
 	if ( ! empty( $GLOBALS['drthai_health_publication_blocked'] ) ) {
-		$location = add_query_arg( 'drthai_review_required', '1', $location );
+		$location = add_query_arg( 'drthai_publish_blocked', sanitize_key( $GLOBALS['drthai_health_publication_blocked'] ), $location );
 	}
 
 	return $location;
@@ -452,14 +539,19 @@ function drthai_health_block_unreviewed_rest_publication( $prepared_post, $reque
 
 	$target_status = isset( $prepared_post->post_status ) ? $prepared_post->post_status : '';
 	$post_id       = absint( $request->get_param( 'id' ) );
+	$thumbnail_id  = $request->has_param( 'featured_media' ) ? absint( $request->get_param( 'featured_media' ) ) : null;
+	$validation    = drthai_health_validate_publication_transition( $post_id, $target_status, $thumbnail_id );
 
-	if ( drthai_health_is_publication_transition( $post_id, $target_status )
-		&& ! drthai_health_post_has_valid_medical_review( $post_id ) ) {
-		return new WP_Error(
-			'drthai_medical_review_required',
-			__( 'Medical Review is required before this Post can be published or scheduled.', 'drthai-health' ),
-			array( 'status' => 400 )
-		);
+	if ( is_wp_error( $validation ) ) {
+		$validation->add_data( array( 'status' => 400 ) );
+		return $validation;
+	}
+
+	if ( null !== $thumbnail_id ) {
+		if ( ! isset( $GLOBALS['drthai_health_rest_candidate_thumbnails'] ) || ! is_array( $GLOBALS['drthai_health_rest_candidate_thumbnails'] ) ) {
+			$GLOBALS['drthai_health_rest_candidate_thumbnails'] = array();
+		}
+		$GLOBALS['drthai_health_rest_candidate_thumbnails'][ $post_id ] = $thumbnail_id;
 	}
 
 	return $prepared_post;

@@ -11,9 +11,13 @@ define('DISABLE_WP_CRON', true);
 
 require '/var/www/html/wp-load.php';
 require_once ABSPATH . 'wp-admin/includes/user.php';
+require_once ABSPATH . 'wp-admin/includes/file.php';
+require_once ABSPATH . 'wp-admin/includes/image.php';
+require_once ABSPATH . 'wp-admin/includes/media.php';
 
 $created_posts = array();
 $created_users = array();
+$created_attachments = array();
 $tests_run = 0;
 
 function drthai_c1_assert(bool $condition, string $label): void
@@ -62,6 +66,31 @@ function drthai_c1_create_post(int $author_id, string $status = 'draft'): int
     }
     $created_posts[] = (int) $post_id;
     return (int) $post_id;
+}
+
+function drthai_c1_create_image(string $suffix): int
+{
+    global $created_attachments;
+    $temporary_file = wp_tempnam("drthai-c1-illustration-{$suffix}.png");
+    file_put_contents($temporary_file, base64_decode('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+A8AAQUBAScY42YAAAAASUVORK5CYII=', true));
+    $attachment_id = media_handle_sideload(
+        array(
+            'name'     => "drthai-c1-illustration-{$suffix}.png",
+            'type'     => 'image/png',
+            'tmp_name' => $temporary_file,
+            'error'    => 0,
+            'size'     => filesize($temporary_file),
+        ),
+        0,
+        'C1 synthetic illustration'
+    );
+    if (is_wp_error($attachment_id)) {
+        @unlink($temporary_file);
+        throw new RuntimeException('Unable to create test image: ' . $attachment_id->get_error_code());
+    }
+    $created_attachments[] = (int) $attachment_id;
+    update_post_meta($attachment_id, '_wp_attachment_image_alt', 'Minh họa kiểm thử nội dung sức khỏe');
+    return (int) $attachment_id;
 }
 
 $baseline_posts = get_posts(
@@ -193,6 +222,8 @@ try {
     drthai_c1_assert($first_timestamp !== $second_timestamp, 're-review replaces server timestamp');
 
     wp_set_current_user($admin_id);
+    $featured_image_id = drthai_c1_create_image($suffix);
+    set_post_thumbnail($draft_id, $featured_image_id);
     wp_update_post(
         array(
             'ID'            => $draft_id,
@@ -205,6 +236,7 @@ try {
 
     $scheduled_id = drthai_c1_create_post($admin_id);
     drthai_c1_assert(true === drthai_health_mark_post_medically_reviewed($scheduled_id), 'authorized reviewer marks scheduled Post reviewed');
+    set_post_thumbnail($scheduled_id, $featured_image_id);
     wp_update_post(
         array(
             'ID'            => $scheduled_id,
@@ -241,6 +273,9 @@ try {
     wp_set_current_user(0);
     foreach (array_reverse($created_posts) as $post_id) {
         wp_delete_post($post_id, true);
+    }
+    foreach (array_reverse($created_attachments) as $attachment_id) {
+        wp_delete_attachment($attachment_id, true);
     }
     foreach (array_reverse($created_users) as $user_id) {
         wp_delete_user($user_id);

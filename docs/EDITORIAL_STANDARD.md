@@ -39,6 +39,10 @@ New medical Posts default to Comments Closed. C1 does not mass-change historical
 
 Every public Single Post automatically displays the theme Medical Disclaimer after article content. Editors must not insert a duplicate disclaimer into Post content. The current wording is `LOCAL_DEVELOPMENT_PROVISIONAL` and requires final doctor/Owner approval before Production.
 
+## Media
+
+Follow `docs/MEDIA_STANDARD.md` for filename, Featured Image, Alt Text, patient-data, format, size, reuse, and rights guidance. A valid Featured Image with meaningful Alt Text is required before a Draft or Pending Post can be Published or Scheduled.
+
 ## Existing-content grandfather rule
 
 Existing published Posts remain published even if they predate Medical Review metadata. C1 does not fabricate historical reviewers or reviewed dates, unpublish legacy content, or invalidate review metadata after later edits. Content lifecycle and material-change policy belong to C4.
