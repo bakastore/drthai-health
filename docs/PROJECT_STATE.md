@@ -368,6 +368,23 @@ Implemented and verified:
 - Packaging Validator passed with 34 runtime files, 14 runtime PHP files, and zero unclassified files.
 - Production remains DEFERRED and UNTOUCHED.
 
+### C4 Content Lifecycle
+
+Status: PASS (Local Development)
+
+Branch: `feature/content-ops-1.2-c4`
+
+Implemented and verified:
+
+- Published and scheduled Posts receive a dynamically derived Current, Never Reviewed, Needs Review, or Updated Since Review state; Draft and Pending Posts remain Pre-publication. No lifecycle state is persisted.
+- The review anchor is the later of valid C1 Reviewed At and the native publication time. Review Due uses one centrally configured 12-calendar-month interval, and a centrally capped 60-second grace excludes initial Publish/Schedule timestamp noise.
+- The native Posts List is the content inventory. One Lifecycle column shows state and due context, while database-side Current, Needs Review, Never Reviewed, Updated Since Review, and Cần xử lý filters preserve pagination and interoperate with C2 and native controls.
+- The existing C1 Medical Review area shows read-only lifecycle context. Normal WordPress editing and native Revisions remain the update/history workflow; only the existing authorized C1 re-review action records a new review.
+- The 60-check C4 suite passed at a 180-Post synthetic scale, including state precedence, SQL-bounded filters, pagination, display, C1 reset path, fixture cleanup, and existing-content integrity.
+- C1, C2, and C3 regression suites passed. Content Engine HTTP and Booking protected-boundary checks passed.
+- Packaging Validator passed with 35 runtime files, 15 runtime PHP files, and zero unclassified files.
+- Production remains DEFERRED and UNTOUCHED.
+
 ---
 
 ## 13. Do Not Build Without Real Need

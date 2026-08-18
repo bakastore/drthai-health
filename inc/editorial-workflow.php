@@ -319,6 +319,7 @@ function drthai_health_render_medical_review_meta_box( $post ) {
 		<p><strong><?php esc_html_e( 'Reviewer:', 'drthai-health' ); ?></strong> <?php echo esc_html( $reviewer->display_name ); ?></p>
 		<p><strong><?php esc_html_e( 'Reviewed:', 'drthai-health' ); ?></strong> <?php echo esc_html( drthai_health_format_reviewed_at( $reviewed_at ) ); ?></p>
 	<?php endif; ?>
+	<?php do_action( 'drthai_health_medical_review_status', $post ); ?>
 	<?php if ( current_user_can( DRTHAI_MEDICAL_REVIEW_CAPABILITY ) && current_user_can( 'edit_post', $post->ID ) ) : ?>
 		<form method="post" action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>">
 			<input type="hidden" name="action" value="drthai_mark_medically_reviewed" />

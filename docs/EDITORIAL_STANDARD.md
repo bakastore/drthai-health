@@ -55,3 +55,5 @@ Follow `docs/MEDIA_STANDARD.md` for filename, Featured Image, Alt Text, patient-
 ## Existing-content grandfather rule
 
 Existing published Posts remain published even if they predate Medical Review metadata. C1 does not fabricate historical reviewers or reviewed dates, unpublish legacy content, or invalidate review metadata after later edits. Content lifecycle and material-change policy belong to C4.
+
+See `docs/CONTENT_LIFECYCLE.md` for the 12-month periodic review model, lifecycle inventory filters, update and native Revision workflow, and Medical Re-review procedure.

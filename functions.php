@@ -11,6 +11,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 require_once __DIR__ . '/inc/theme-setup.php';
 require_once __DIR__ . '/inc/editorial-workflow.php';
+require_once __DIR__ . '/inc/content-lifecycle.php';
 require_once __DIR__ . '/inc/editorial-admin.php';
 
 /**

@@ -22,6 +22,7 @@ function drthai_health_editorial_admin_columns( $columns ) {
 		'drthai_media_status'   => __( 'Media', 'drthai-health' ),
 		'drthai_updated_date'   => __( 'Updated', 'drthai-health' ),
 		'drthai_editorial_health' => __( 'Editorial Health', 'drthai-health' ),
+		'drthai_lifecycle'       => __( 'Lifecycle', 'drthai-health' ),
 	);
 	$result = array();
 
@@ -188,6 +189,21 @@ function drthai_health_render_editorial_admin_column( $column, $post_id ) {
 		if ( $health['reasons'] ) {
 			echo '<br><span>' . esc_html( implode( '; ', array_slice( $health['reasons'], 0, 5 ) ) ) . '</span>';
 		}
+		return;
+	}
+
+	if ( 'drthai_lifecycle' === $column ) {
+		$lifecycle = drthai_health_get_content_lifecycle( $post_id );
+		echo '<strong>' . esc_html( $lifecycle['label'] ) . '</strong>';
+		if ( 'never_reviewed' === $lifecycle['state'] ) {
+			echo '<br><span>' . esc_html__( 'Chưa có ngày rà soát', 'drthai-health' ) . '</span>';
+		} elseif ( 'current' === $lifecycle['state'] && $lifecycle['due'] ) {
+			echo '<br><span>' . esc_html__( 'Review due:', 'drthai-health' ) . ' ' . esc_html( drthai_health_format_lifecycle_date( $lifecycle['due'] ) ) . '</span>';
+		} elseif ( 'needs_review' === $lifecycle['state'] && $lifecycle['due'] ) {
+			echo '<br><span>' . esc_html__( 'Overdue since:', 'drthai-health' ) . ' ' . esc_html( drthai_health_format_lifecycle_date( $lifecycle['due'] ) ) . '</span>';
+		} elseif ( 'updated_since_review' === $lifecycle['state'] ) {
+			echo '<br><span>' . esc_html__( 'Content changed after review', 'drthai-health' ) . '</span>';
+		}
 	}
 }
 add_action( 'manage_post_posts_custom_column', 'drthai_health_render_editorial_admin_column', 10, 2 );
@@ -231,17 +247,20 @@ function drthai_health_editorial_admin_sanitize_filters( $source ) {
 	$review_values = array( 'reviewed', 'unreviewed' );
 	$media_values  = array( 'complete', 'missing_image', 'missing_alt' );
 	$health_values = array( 'healthy', 'attention' );
+	$lifecycle_values = array( 'current', 'needs_review', 'never_reviewed', 'updated_since_review', 'needs_action' );
 	$review_status = sanitize_key( drthai_health_editorial_admin_request_value( $source, 'drthai_review_status' ) );
 	$media_status  = sanitize_key( drthai_health_editorial_admin_request_value( $source, 'drthai_media_status' ) );
 	$health_status = sanitize_key( drthai_health_editorial_admin_request_value( $source, 'drthai_editorial_health' ) );
 	$reviewer_raw  = drthai_health_editorial_admin_request_value( $source, 'drthai_reviewer' );
 	$reviewer_id   = ctype_digit( $reviewer_raw ) ? absint( $reviewer_raw ) : 0;
+	$lifecycle     = sanitize_key( drthai_health_editorial_admin_request_value( $source, 'drthai_lifecycle' ) );
 
 	return array(
 		'review_status' => in_array( $review_status, $review_values, true ) ? $review_status : '',
 		'reviewer_id'   => $reviewer_id,
 		'media_status'  => in_array( $media_status, $media_values, true ) ? $media_status : '',
 		'health_status' => in_array( $health_status, $health_values, true ) ? $health_status : '',
+		'lifecycle'     => in_array( $lifecycle, $lifecycle_values, true ) ? $lifecycle : '',
 	);
 }
 
@@ -322,6 +341,16 @@ function drthai_health_render_editorial_admin_filters( $post_type, $which ) {
 		<option value="healthy" <?php selected( $filters['health_status'], 'healthy' ); ?>><?php esc_html_e( 'OK / Ready', 'drthai-health' ); ?></option>
 		<option value="attention" <?php selected( $filters['health_status'], 'attention' ); ?>><?php esc_html_e( 'Needs Attention', 'drthai-health' ); ?></option>
 	</select>
+
+	<label class="screen-reader-text" for="drthai-lifecycle-filter"><?php esc_html_e( 'Lọc theo vòng đời nội dung', 'drthai-health' ); ?></label>
+	<select id="drthai-lifecycle-filter" name="drthai_lifecycle">
+		<option value=""><?php esc_html_e( 'Tất cả vòng đời', 'drthai-health' ); ?></option>
+		<option value="current" <?php selected( $filters['lifecycle'], 'current' ); ?>><?php esc_html_e( 'Current', 'drthai-health' ); ?></option>
+		<option value="needs_review" <?php selected( $filters['lifecycle'], 'needs_review' ); ?>><?php esc_html_e( 'Needs Review', 'drthai-health' ); ?></option>
+		<option value="never_reviewed" <?php selected( $filters['lifecycle'], 'never_reviewed' ); ?>><?php esc_html_e( 'Never Reviewed', 'drthai-health' ); ?></option>
+		<option value="updated_since_review" <?php selected( $filters['lifecycle'], 'updated_since_review' ); ?>><?php esc_html_e( 'Updated Since Review', 'drthai-health' ); ?></option>
+		<option value="needs_action" <?php selected( $filters['lifecycle'], 'needs_action' ); ?>><?php esc_html_e( 'Cần xử lý', 'drthai-health' ); ?></option>
+	</select>
 	<?php
 }
 add_action( 'restrict_manage_posts', 'drthai_health_render_editorial_admin_filters', 10, 2 );
@@ -340,6 +369,7 @@ function drthai_health_editorial_admin_apply_query( $query, $source ) {
 	$query->set( 'drthai_c2_reviewer_id', $filters['reviewer_id'] );
 	$query->set( 'drthai_c2_media_status', $filters['media_status'] );
 	$query->set( 'drthai_c2_health_status', $filters['health_status'] );
+	$query->set( 'drthai_c4_lifecycle', $filters['lifecycle'] );
 
 	$order_by = sanitize_key( drthai_health_editorial_admin_request_value( $source, 'orderby' ) );
 	if ( 'drthai_updated_date' === $order_by ) {
@@ -463,6 +493,7 @@ function drthai_health_editorial_admin_posts_clauses( $clauses, $query ) {
 	$reviewer_id   = absint( $query->get( 'drthai_c2_reviewer_id' ) );
 	$media_status  = $query->get( 'drthai_c2_media_status' );
 	$health_status = $query->get( 'drthai_c2_health_status' );
+	$lifecycle     = $query->get( 'drthai_c4_lifecycle' );
 
 	if ( 'reviewed' === $review_status ) {
 		$clauses['where'] .= " AND ({$predicates['review']})";
@@ -495,6 +526,13 @@ function drthai_health_editorial_admin_posts_clauses( $clauses, $query ) {
 		$clauses['where'] .= " AND ({$predicates['complete']})";
 	} elseif ( 'attention' === $health_status ) {
 		$clauses['where'] .= " AND NOT ({$predicates['complete']})";
+	}
+
+	if ( $lifecycle ) {
+		$lifecycle_predicates = drthai_health_content_lifecycle_sql_predicates();
+		if ( isset( $lifecycle_predicates[ $lifecycle ] ) ) {
+			$clauses['where'] .= " AND ({$lifecycle_predicates[$lifecycle]})";
+		}
 	}
 
 	if ( 'drthai_reviewed_date' === $query->get( 'orderby' ) ) {

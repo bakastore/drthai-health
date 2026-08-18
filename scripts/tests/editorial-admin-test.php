@@ -106,6 +106,7 @@ function drthai_c2_query(array $source, array $args): WP_Query
     $args['drthai_c2_reviewer_id'] = $filters['reviewer_id'];
     $args['drthai_c2_media_status'] = $filters['media_status'];
     $args['drthai_c2_health_status'] = $filters['health_status'];
+    $args['drthai_c4_lifecycle'] = $filters['lifecycle'];
     if (isset($source['orderby']) && 'drthai_updated_date' === sanitize_key($source['orderby'])) {
         $args['orderby'] = 'modified';
     } elseif (isset($source['orderby']) && 'drthai_reviewed_date' === sanitize_key($source['orderby'])) {
@@ -210,6 +211,7 @@ try {
         && false !== strpos($filter_markup, 'drthai-reviewer-filter')
         && false !== strpos($filter_markup, 'drthai-media-status-filter')
         && false !== strpos($filter_markup, 'drthai-health-filter')
+        && false !== strpos($filter_markup, 'drthai-lifecycle-filter')
         && false !== strpos($filter_markup, get_user_by('id', $admin_one)->display_name),
         'native filter controls render with accessible labels and relevant reviewers'
     );
@@ -284,7 +286,7 @@ try {
         'drthai_media_status' => array('complete'),
         'drthai_editorial_health' => 'anything',
     ));
-    drthai_c2_assert(array('review_status' => '', 'reviewer_id' => 0, 'media_status' => '', 'health_status' => '') === $invalid, 'query parameters are sanitized and allowlisted');
+    drthai_c2_assert(array('review_status' => '', 'reviewer_id' => 0, 'media_status' => '', 'health_status' => '', 'lifecycle' => '') === $invalid, 'query parameters are sanitized and allowlisted');
     drthai_c2_assert(!current_user_can('edit_post_meta', $ready_post, DRTHAI_MEDICAL_REVIEWER_META), 'C2 cannot write protected review metadata');
     ob_start();
     do_action('quick_edit_custom_box', 'drthai_editorial_health', 'post');
