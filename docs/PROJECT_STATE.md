@@ -5,7 +5,7 @@ Purpose: Current factual state of the project
 
 Last updated: 2026-08-19
 Current development version: 1.2.0
-Current phase: Development Acceptance 2.0 — External Review
+Current phase: DEVELOPMENT 1.2 — OWNER ACCEPTED / CLOSED
 Production deployment: DEFERRED
 
 ---
@@ -39,7 +39,24 @@ Repository:
 
 Current branch:
 
-gate/development-acceptance-2.0
+main
+
+Development 1.2 integration commit:
+
+edd8855d7a8318d9ac58e0a06e1aec4d80b8be6d
+
+Accepted runtime baseline:
+
+fe3a670734093982afc87ca9393002f6d5e58160
+
+Development Acceptance 2.0 gate evidence commit:
+
+10fd5f7dadde041ddcbdc56adaf2758b6bd83fb3
+
+Integration record:
+
+- Pull Request #1: `release: integrate accepted DrThai Health development baseline`
+- Merged `gate/development-acceptance-2.0` into `main`.
 
 Last confirmed Local Development Release commit:
 
@@ -254,7 +271,7 @@ NO
 
 Current focus is professional website administration and content operations.
 
-Public-facing visual redesign is deferred.
+Public-facing UI/UX polish is complete and Owner accepted.
 
 Primary priorities:
 
@@ -290,11 +307,7 @@ P1 — SEO / Discovery
 - Article structured data
 - internal linking
 
-Later:
-
-- public UI / UX polish
-
-Production work remains deferred until Development is Owner-approved.
+Production work remains deferred. Production Preparation requires a separate Owner-approved mission.
 
 ---
 
@@ -302,7 +315,7 @@ Production work remains deferred until Development is Owner-approved.
 
 Current phase:
 
-CONTENT OPERATIONS 1.2
+CONTENT OPERATIONS 1.2 — COMPLETED / OWNER ACCEPTED
 
 Goal:
 
@@ -430,7 +443,7 @@ Prefer native WordPress capabilities whenever practical.
 
 Status:
 
-PASS / OWNER ACCEPTANCE PENDING
+PASS / OWNER ACCEPTED
 
 Verified locally on 2026-08-18:
 
@@ -450,14 +463,15 @@ Durable public experience rules are documented in `docs/PUBLIC_EXPERIENCE_STANDA
 
 Status:
 
-PASS / EXTERNAL REVIEW REQUIRED
+PASS / OWNER ACCEPTED
 
 Verified on 2026-08-19:
 
 - accepted runtime candidate: `fe3a670734093982afc87ca9393002f6d5e58160`;
 - accepted lineage, C1–C5 regression, Content Engine routing, Booking boundary, UI/UX smoke, accessibility sanity, controlled Local restart, data persistence, security sanity, Packaging Policy, Packaging Validator, and zero-unclassified gates passed;
 - committed Gate evidence is documented in `docs/DEVELOPMENT_ACCEPTANCE_2.0.md`;
-- external review and Owner Development Approval remain pending;
+- external review was WAIVED BY OWNER;
+- Owner Development Approval is complete;
 - Production Preparation is NOT AUTHORIZED and Production remains DEFERRED.
 
 ---
@@ -485,9 +499,9 @@ No Production mutation without explicit Owner approval.
 
 Next Mission:
 
-EXTERNAL_REVIEW
+PRODUCTION_PREPARATION
 
-Submit Development Acceptance 2.0 evidence for mandatory external review. Do not begin Production Preparation.
+This mission is next in the roadmap but is NOT AUTHORIZED until the Owner opens a separate Production Preparation mission. Production remains DEFERRED.
 
 ---
 

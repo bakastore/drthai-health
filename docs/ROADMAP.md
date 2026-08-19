@@ -81,7 +81,7 @@ Production deployment remains deferred.
 
 Status:
 
-NEXT
+COMPLETED / OWNER ACCEPTED
 
 Objective:
 
@@ -194,13 +194,21 @@ Definition of Done:
 Published content exposes the metadata required for modern search and
 social discovery.
 
+Completion record:
+
+- C1 Editorial Architecture: COMPLETED / OWNER ACCEPTED
+- C2 WordPress Admin Experience: COMPLETED / OWNER ACCEPTED
+- C3 Media Governance: COMPLETED / OWNER ACCEPTED
+- C4 Content Lifecycle: COMPLETED / OWNER ACCEPTED
+- C5 SEO / Discovery: COMPLETED / OWNER ACCEPTED
+
 ---
 
 ## 5. Phase 4 — Public UI / UX Polish
 
 Status:
 
-DEFERRED BY OWNER
+COMPLETED / OWNER ACCEPTED
 
 Begin after Content Operations becomes functionally mature.
 
@@ -219,13 +227,15 @@ Possible scope:
 
 UI work must not block Content Operations.
 
+UI-UX 2.0 and Development Acceptance 2.0 passed and were accepted by the Owner.
+
 ---
 
 ## 6. Phase 5 — Production Preparation
 
 Status:
 
-DEFERRED
+NEXT — OWNER AUTHORIZATION REQUIRED
 
 Begin only after the Owner considers Development complete and stable.
 
@@ -243,6 +253,8 @@ Required before deployment:
 10. Verify Production release.
 
 Production mutations require explicit Owner approval.
+
+This roadmap status does not authorize Production access, preparation, deployment, or mutation. A separate Owner-approved Production Preparation mission is required.
 
 ---
 
@@ -299,14 +311,11 @@ Production Go-Live requires:
 
 Current priority order:
 
-CONTENT OPERATIONS 1.2
-→ Content-management maturity
-→ SEO / Discovery readiness
-→ UI / UX final polish
-→ Owner Development approval
-→ Production preparation
-→ Production deployment
+Development 1.2 Owner Closeout
+→ Owner-approved Production Preparation
+→ Controlled Production Deployment
 → Backup / Restore / Monitoring / Security
+→ Production Readiness Review
 → Go-Live
 
 ---
