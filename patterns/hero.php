@@ -18,7 +18,7 @@
 			<!-- /wp:paragraph -->
 
 			<!-- wp:heading {"level":1,"className":"drthai-hero__title"} -->
-			<h1 class="wp-block-heading drthai-hero__title">Chăm sóc tiêu hóa,<br><mark style="background-color:rgba(0,0,0,0)" class="has-inline-color">an tâm</mark> mỗi ngày</h1>
+			<h1 class="wp-block-heading drthai-hero__title">Chăm sóc tiêu hóa,<br><mark style="background-color:transparent" class="has-inline-color">an tâm</mark> mỗi ngày</h1>
 			<!-- /wp:heading -->
 
 			<!-- wp:paragraph {"textColor":"ink-soft","className":"drthai-hero__copy","fontSize":"large"} -->

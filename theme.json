@@ -32,12 +32,12 @@
         {
           "name": "Xanh chuyên môn",
           "slug": "clinical",
-          "gradient": "linear-gradient(135deg, #0A403A 0%, #0E5C52 100%)"
+          "gradient": "linear-gradient(135deg, var(--wp--preset--color--primary-dark) 0%, var(--wp--preset--color--primary) 100%)"
         },
         {
           "name": "Kem ấm",
           "slug": "warm",
-          "gradient": "linear-gradient(135deg, #FAF6EE 0%, #F1E9D8 100%)"
+          "gradient": "linear-gradient(135deg, var(--wp--preset--color--background) 0%, var(--wp--preset--color--background-alt) 100%)"
         }
       ]
     },
@@ -95,7 +95,7 @@
         {
           "name": "Thẻ",
           "slug": "card",
-          "shadow": "0 20px 50px -25px rgba(10,64,58,0.35)"
+          "shadow": "0 20px 50px -25px color-mix(in srgb, var(--wp--preset--color--primary-dark) 35%, transparent)"
         }
       ]
     }
