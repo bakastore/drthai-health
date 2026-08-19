@@ -17,12 +17,12 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 function drthai_health_editorial_admin_columns( $columns ) {
 	$editorial_columns = array(
-		'drthai_medical_review' => __( 'Medical Review', 'drthai-health' ),
+		'drthai_medical_review' => __( 'Review', 'drthai-health' ),
 		'drthai_reviewed_date'  => __( 'Reviewed', 'drthai-health' ),
 		'drthai_media_status'   => __( 'Media', 'drthai-health' ),
-		'drthai_updated_date'   => __( 'Updated', 'drthai-health' ),
-		'drthai_editorial_health' => __( 'Editorial Health', 'drthai-health' ),
-		'drthai_lifecycle'       => __( 'Lifecycle', 'drthai-health' ),
+		'drthai_updated_date'   => __( 'Cập nhật', 'drthai-health' ),
+		'drthai_editorial_health' => __( 'Chất lượng', 'drthai-health' ),
+		'drthai_lifecycle'       => __( 'Vòng đời', 'drthai-health' ),
 	);
 	$result = array();
 
@@ -40,6 +40,56 @@ function drthai_health_editorial_admin_columns( $columns ) {
 	return $result;
 }
 add_filter( 'manage_post_posts_columns', 'drthai_health_editorial_admin_columns' );
+
+/**
+ * Hide secondary Posts columns for users who have not saved a preference.
+ *
+ * WordPress applies this default only until a user customizes columns through
+ * Screen Options. Columns remain registered and can always be enabled there.
+ *
+ * @param string[]  $hidden Default hidden column keys.
+ * @param WP_Screen $screen Current screen.
+ * @return string[]
+ */
+function drthai_health_editorial_admin_default_hidden_columns( $hidden, $screen ) {
+	if ( ! $screen || 'edit-post' !== $screen->id || 'post' !== $screen->post_type ) {
+		return $hidden;
+	}
+
+	$secondary_columns = array(
+		'tags',
+		'comments',
+		'drthai_reviewed_date',
+		'drthai_media_status',
+		'wpseo-score',
+		'wpseo-score-readability',
+		'wpseo-links',
+		'wpseo-linked',
+	);
+
+	return array_values( array_unique( array_merge( $hidden, $secondary_columns ) ) );
+}
+add_filter( 'default_hidden_columns', 'drthai_health_editorial_admin_default_hidden_columns', 10, 2 );
+
+/**
+ * Load compact table styling only on the native Posts List screen.
+ *
+ * @param string $hook_suffix Current admin page hook.
+ */
+function drthai_health_enqueue_editorial_admin_styles( $hook_suffix ) {
+	$screen = get_current_screen();
+	if ( 'edit.php' !== $hook_suffix || ! $screen || 'edit-post' !== $screen->id || 'post' !== $screen->post_type ) {
+		return;
+	}
+
+	wp_enqueue_style(
+		'drthai-health-editorial-admin',
+		get_theme_file_uri( '/assets/css/editorial-admin.css' ),
+		array(),
+		wp_get_theme()->get( 'Version' )
+	);
+}
+add_action( 'admin_enqueue_scripts', 'drthai_health_enqueue_editorial_admin_styles' );
 
 /**
  * Return the displayable reviewer for a valid C1 review.
@@ -154,7 +204,12 @@ function drthai_health_get_editorial_health( $post_id ) {
 function drthai_health_render_editorial_admin_column( $column, $post_id ) {
 	if ( 'drthai_medical_review' === $column ) {
 		$reviewer = drthai_health_editorial_admin_reviewer( $post_id );
-		echo $reviewer ? esc_html( $reviewer->display_name ) : esc_html__( 'Chưa rà soát', 'drthai-health' );
+		if ( $reviewer ) {
+			echo '<strong>' . esc_html__( 'Đã rà soát', 'drthai-health' ) . '</strong><br>';
+			echo '<span>' . esc_html( $reviewer->display_name ) . '</span>';
+		} else {
+			echo esc_html__( 'Chưa rà soát', 'drthai-health' );
+		}
 		return;
 	}
 
@@ -178,31 +233,41 @@ function drthai_health_render_editorial_admin_column( $column, $post_id ) {
 	}
 
 	if ( 'drthai_updated_date' === $column ) {
-		$modified = get_post_modified_time( get_option( 'date_format' ) . ' ' . get_option( 'time_format' ), false, $post_id, true );
+		$modified = get_post_modified_time( get_option( 'date_format' ), false, $post_id, true );
 		echo $modified ? esc_html( $modified ) : '&mdash;';
 		return;
 	}
 
 	if ( 'drthai_editorial_health' === $column ) {
-		$health = drthai_health_get_editorial_health( $post_id );
-		echo '<strong>' . esc_html( $health['label'] ) . '</strong>';
+		$health         = drthai_health_get_editorial_health( $post_id );
+		$compact_labels = array(
+			'ok'        => __( 'OK', 'drthai-health' ),
+			'ready'     => __( 'Sẵn sàng', 'drthai-health' ),
+			'attention' => sprintf(
+				/* translators: %d: number of current editorial issues. */
+				__( 'Cần xử lý · %d', 'drthai-health' ),
+				count( $health['reasons'] )
+			),
+		);
+		echo '<strong>' . esc_html( $compact_labels[ $health['state'] ] ) . '</strong>';
 		if ( $health['reasons'] ) {
-			echo '<br><span>' . esc_html( implode( '; ', array_slice( $health['reasons'], 0, 5 ) ) ) . '</span>';
+			echo '<span class="screen-reader-text">: ' . esc_html( implode( '; ', $health['reasons'] ) ) . '</span>';
 		}
 		return;
 	}
 
 	if ( 'drthai_lifecycle' === $column ) {
-		$lifecycle = drthai_health_get_content_lifecycle( $post_id );
-		echo '<strong>' . esc_html( $lifecycle['label'] ) . '</strong>';
-		if ( 'never_reviewed' === $lifecycle['state'] ) {
-			echo '<br><span>' . esc_html__( 'Chưa có ngày rà soát', 'drthai-health' ) . '</span>';
-		} elseif ( 'current' === $lifecycle['state'] && $lifecycle['due'] ) {
-			echo '<br><span>' . esc_html__( 'Review due:', 'drthai-health' ) . ' ' . esc_html( drthai_health_format_lifecycle_date( $lifecycle['due'] ) ) . '</span>';
-		} elseif ( 'needs_review' === $lifecycle['state'] && $lifecycle['due'] ) {
-			echo '<br><span>' . esc_html__( 'Overdue since:', 'drthai-health' ) . ' ' . esc_html( drthai_health_format_lifecycle_date( $lifecycle['due'] ) ) . '</span>';
-		} elseif ( 'updated_since_review' === $lifecycle['state'] ) {
-			echo '<br><span>' . esc_html__( 'Content changed after review', 'drthai-health' ) . '</span>';
+		$lifecycle       = drthai_health_get_content_lifecycle( $post_id );
+		$lifecycle_labels = array(
+			'current'              => __( 'Hiện hành', 'drthai-health' ),
+			'never_reviewed'       => __( 'Chưa review', 'drthai-health' ),
+			'needs_review'         => __( 'Cần review', 'drthai-health' ),
+			'updated_since_review' => __( 'Đã sửa sau review', 'drthai-health' ),
+			'pre_publication'      => __( 'Tiền xuất bản', 'drthai-health' ),
+		);
+		echo '<strong>' . esc_html( $lifecycle_labels[ $lifecycle['state'] ] ) . '</strong>';
+		if ( in_array( $lifecycle['state'], array( 'current', 'needs_review' ), true ) && $lifecycle['due'] ) {
+			echo '<br><span>' . esc_html( drthai_health_format_lifecycle_date( $lifecycle['due'] ) ) . '</span>';
 		}
 	}
 }

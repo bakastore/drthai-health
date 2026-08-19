@@ -1,0 +1,73 @@
+/**
+ * Compact editorial workspace for the native Posts List Table only.
+ */
+
+body.post-type-post.edit-php .wp-list-table.posts {
+	table-layout: fixed;
+}
+
+body.post-type-post.edit-php .wp-list-table.posts .column-title {
+	width: 32%;
+	min-width: 220px;
+}
+
+body.post-type-post.edit-php .wp-list-table.posts .column-author {
+	width: 8%;
+}
+
+body.post-type-post.edit-php .wp-list-table.posts .column-categories {
+	width: 10%;
+}
+
+body.post-type-post.edit-php .wp-list-table.posts .column-drthai_medical_review,
+body.post-type-post.edit-php .wp-list-table.posts .column-drthai_updated_date,
+body.post-type-post.edit-php .wp-list-table.posts .column-drthai_editorial_health {
+	width: 9%;
+}
+
+body.post-type-post.edit-php .wp-list-table.posts .column-drthai_lifecycle {
+	width: 10%;
+}
+
+body.post-type-post.edit-php .wp-list-table.posts .column-date {
+	width: 13%;
+}
+
+body.post-type-post.edit-php .wp-list-table.posts th,
+body.post-type-post.edit-php .wp-list-table.posts td {
+	word-break: normal;
+	overflow-wrap: break-word;
+}
+
+body.post-type-post.edit-php .wp-list-table.posts th a,
+body.post-type-post.edit-php .wp-list-table.posts th span,
+body.post-type-post.edit-php .wp-list-table.posts td {
+	white-space: normal;
+}
+
+body.post-type-post.edit-php .wp-list-table.posts .column-drthai_medical_review,
+body.post-type-post.edit-php .wp-list-table.posts .column-drthai_editorial_health,
+body.post-type-post.edit-php .wp-list-table.posts .column-drthai_lifecycle,
+body.post-type-post.edit-php .wp-list-table.posts .column-drthai_updated_date {
+	line-height: 1.35;
+}
+
+@media screen and (max-width: 1100px) {
+	body.post-type-post.edit-php .wp-list-table.posts .column-title {
+		width: 35%;
+		min-width: 200px;
+	}
+
+	body.post-type-post.edit-php .wp-list-table.posts .column-drthai_medical_review {
+		width: 8%;
+	}
+
+	body.post-type-post.edit-php .wp-list-table.posts .column-drthai_lifecycle,
+	body.post-type-post.edit-php .wp-list-table.posts .column-drthai_editorial_health {
+		width: 9%;
+	}
+
+	body.post-type-post.edit-php .wp-list-table.posts .column-date {
+		width: 12%;
+	}
+}

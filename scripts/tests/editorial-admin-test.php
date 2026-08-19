@@ -222,7 +222,13 @@ try {
     drthai_c2_assert(isset($columns['drthai_media_status']), 'Posts List contains Media column');
     drthai_c2_assert(isset($columns['drthai_updated_date']), 'Posts List contains Updated Date column');
     drthai_c2_assert(isset($columns['drthai_editorial_health']), 'Posts List contains Editorial Health column');
-    drthai_c2_assert(false !== strpos(drthai_c2_capture_column('drthai_medical_review', $ready_post), get_user_by('id', $admin_one)->display_name), 'reviewed Post shows reviewer display name');
+    drthai_c2_assert('Review' === $columns['drthai_medical_review'], 'Medical Review column uses compact Review heading');
+    drthai_c2_assert('Cập nhật' === $columns['drthai_updated_date'] && 'Chất lượng' === $columns['drthai_editorial_health'] && 'Vòng đời' === $columns['drthai_lifecycle'], 'primary editorial columns use compact Vietnamese headings');
+    $default_hidden = drthai_health_editorial_admin_default_hidden_columns(array('existing-preference'), (object) array('id' => 'edit-post', 'post_type' => 'post'));
+    drthai_c2_assert(!array_diff(array('existing-preference', 'tags', 'comments', 'drthai_reviewed_date', 'drthai_media_status', 'wpseo-score', 'wpseo-score-readability', 'wpseo-links', 'wpseo-linked'), $default_hidden), 'secondary and Yoast auxiliary columns are hidden by default without removing existing defaults');
+    drthai_c2_assert(array('unchanged') === drthai_health_editorial_admin_default_hidden_columns(array('unchanged'), (object) array('id' => 'edit-page', 'post_type' => 'page')), 'default hidden columns are scoped away from other screens');
+    $review_output = drthai_c2_capture_column('drthai_medical_review', $ready_post);
+    drthai_c2_assert(false !== strpos($review_output, 'Đã rà soát') && false !== strpos($review_output, get_user_by('id', $admin_one)->display_name), 'reviewed Post shows compact state and reviewer name');
     $reviewed_at = get_post_meta($ready_post, DRTHAI_REVIEWED_AT_META, true);
     drthai_c2_assert(drthai_health_format_reviewed_at($reviewed_at) === drthai_c2_capture_column('drthai_reviewed_date', $ready_post), 'Reviewed Date uses deterministic site-local formatting');
     drthai_c2_assert('Chưa rà soát' === drthai_c2_capture_column('drthai_medical_review', $unreviewed_post), 'unreviewed Post is clearly identified');
@@ -237,7 +243,9 @@ try {
     drthai_c2_assert('ready' === $ready_health['state'] && !$ready_health['reasons'], 'fully compliant Draft receives READY health state');
     $published_health = drthai_health_get_editorial_health($published_post);
     drthai_c2_assert('ok' === $published_health['state'] && !$published_health['reasons'], 'fully compliant Published Post receives OK health state');
-    drthai_c2_assert(false !== strpos(drthai_c2_capture_column('drthai_editorial_health', $unreviewed_post), 'Thiếu review'), 'Needs Attention row includes actionable reasons');
+    $health_output = drthai_c2_capture_column('drthai_editorial_health', $unreviewed_post);
+    drthai_c2_assert(false !== strpos($health_output, 'Cần xử lý · 4'), 'Needs Attention row shows compact issue count');
+    drthai_c2_assert(false !== strpos($health_output, 'screen-reader-text') && false !== strpos($health_output, 'Thiếu review'), 'full Editorial Health reasons remain available to assistive technology');
 
     $scope_ids = array($missing_alt_post, $unreviewed_post, $missing_image_post, $ready_post, $second_ready_post, $published_post);
     $base_args = array('post_type' => 'post', 'post_status' => 'any', 'post__in' => $scope_ids, 'posts_per_page' => 50, 'orderby' => 'ID', 'order' => 'ASC');

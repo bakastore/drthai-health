@@ -189,14 +189,14 @@ try {
 
 	$columns = drthai_health_editorial_admin_columns( array( 'cb' => 'cb', 'title' => 'Title', 'date' => 'Date' ) );
 	drthai_c4_assert( isset( $columns['drthai_lifecycle'] ), 'Lifecycle column exists' );
-	drthai_c4_assert( false !== strpos( drthai_c4_column( $current ), 'Current' ), 'CURRENT displays correctly' );
-	drthai_c4_assert( false !== strpos( drthai_c4_column( $never ), 'Never Reviewed' ), 'NEVER REVIEWED displays correctly' );
-	drthai_c4_assert( false !== strpos( drthai_c4_column( $overdue ), 'Needs Review' ), 'NEEDS REVIEW displays correctly' );
-	drthai_c4_set_post( $updated, 'publish', '2026-01-01 00:00:00', '2026-08-18 23:59:59' );
-	drthai_c4_assert( false !== strpos( drthai_c4_column( $updated ), 'Updated Since Review' ), 'UPDATED SINCE REVIEW displays correctly' );
-	drthai_c4_assert( false !== strpos( drthai_c4_column( $draft ), 'Pre-publication' ), 'PRE-PUBLICATION displays correctly' );
-	drthai_c4_assert( false !== strpos( drthai_c4_column( $current ), 'Review due:' ), 'Review Due displays for CURRENT' );
-	drthai_c4_assert( false !== strpos( drthai_c4_column( $overdue ), 'Overdue since:' ), 'overdue date displays for NEEDS REVIEW' );
+	drthai_c4_assert( false !== strpos( drthai_c4_column( $current ), 'Hiện hành' ), 'CURRENT displays compact Vietnamese label' );
+	drthai_c4_assert( false !== strpos( drthai_c4_column( $never ), 'Chưa review' ), 'NEVER REVIEWED displays compact Vietnamese label' );
+	drthai_c4_assert( false !== strpos( drthai_c4_column( $overdue ), 'Cần review' ), 'NEEDS REVIEW displays compact Vietnamese label' );
+	drthai_c4_set_post( $updated, 'publish', '2026-01-01 00:00:00', gmdate( 'Y-m-d H:i:s', time() + 120 ) );
+	drthai_c4_assert( false !== strpos( drthai_c4_column( $updated ), 'Đã sửa sau review' ), 'UPDATED SINCE REVIEW displays compact Vietnamese label' );
+	drthai_c4_assert( false !== strpos( drthai_c4_column( $draft ), 'Tiền xuất bản' ), 'PRE-PUBLICATION displays compact Vietnamese label' );
+	drthai_c4_assert( false !== strpos( drthai_c4_column( $current ), drthai_health_format_lifecycle_date( $current_state['due'] ) ), 'Review Due displays compactly for CURRENT' );
+	drthai_c4_assert( false !== strpos( drthai_c4_column( $overdue ), drthai_health_format_lifecycle_date( drthai_health_get_content_lifecycle( $overdue )['due'] ) ), 'overdue date displays compactly for NEEDS REVIEW' );
 	drthai_c4_assert( drthai_health_format_lifecycle_date( $current_state['due'] ) === wp_date( get_option( 'date_format' ), $current_state['due']->getTimestamp(), wp_timezone() ), 'site-local date formatting is deterministic' );
 	drthai_c4_assert( false === strpos( drthai_c4_column( $current ), 'T00:00:00' ) && false === strpos( drthai_c4_column( $current ), 'Z' ), 'admin display omits raw internal timestamps' );
 
