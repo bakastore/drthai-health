@@ -236,7 +236,9 @@ Development 1.2.1 completion record:
 - B2b Environment Context: PASS / OWNER ACCEPTED
 - B3 Design Token Unification: PASS / OWNER ACCEPTED
 - Final Development Readiness: PASS
-- Owner Final 1.2.1 Acceptance: PENDING
+- Owner Final 1.2.1 Acceptance: OWNER ACCEPTED / COMPLETE
+- Development 1.2.1: CLOSED / OWNER ACCEPTED
+- Production: DEFERRED / NOT AUTHORIZED
 
 ---
 
@@ -244,7 +246,7 @@ Development 1.2.1 completion record:
 
 Status:
 
-NEXT AFTER OWNER FINAL 1.2.1 ACCEPTANCE — OWNER AUTHORIZATION REQUIRED
+NEXT PHASE — OWNER AUTHORIZATION REQUIRED
 
 Begin only after the Owner considers Development complete and stable.
 
@@ -320,8 +322,7 @@ Production Go-Live requires:
 
 Current priority order:
 
-Owner Final 1.2.1 Acceptance
-→ Owner-approved Production Preparation
+Owner-approved Production Preparation
 → Controlled Production Deployment
 → Backup / Restore / Monitoring / Security
 → Production Readiness Review

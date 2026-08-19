@@ -5,8 +5,8 @@ Purpose: Current factual state of the project
 
 Last updated: 2026-08-19
 Current development version: 1.2.1
-Current phase: DEVELOPMENT 1.2.1 — FINAL READINESS PASS / OWNER ACCEPTANCE PENDING
-Production deployment: DEFERRED
+Current phase: DEVELOPMENT 1.2.1 — CLOSED / OWNER ACCEPTED
+Production deployment: DEFERRED / NOT AUTHORIZED
 
 ---
 
@@ -478,7 +478,7 @@ Verified on 2026-08-19:
 
 Status:
 
-PASS / OWNER FINAL ACCEPTANCE PENDING
+CLOSED / OWNER ACCEPTED
 
 Verified on 2026-08-19:
 
@@ -488,8 +488,9 @@ Verified on 2026-08-19:
 - B3 Design Token Unification: PASS / OWNER ACCEPTED.
 - The theme development version is normalized to 1.2.1.
 - Final Development Readiness: PASS.
-- Owner Final 1.2.1 Acceptance: PENDING.
-- Production remains DEFERRED and is not authorized.
+- Owner Final 1.2.1 Acceptance: OWNER ACCEPTED / COMPLETE.
+- Development 1.2.1: CLOSED / OWNER ACCEPTED.
+- Production remains DEFERRED / NOT AUTHORIZED.
 
 ---
 
@@ -514,11 +515,11 @@ No Production mutation without explicit Owner approval.
 
 ## 17. Next Mission
 
-Next action:
+Next phase:
 
-OWNER FINAL 1.2.1 ACCEPTANCE
+PRODUCTION PREPARATION — OWNER AUTHORIZATION REQUIRED
 
-After Owner acceptance, the next phase is PRODUCTION PREPARATION. It remains NOT AUTHORIZED until the Owner opens a separate Production Preparation mission. Production remains DEFERRED.
+Production Preparation remains NOT AUTHORIZED until the Owner opens a separate approved mission. Production remains DEFERRED.
 
 ---
 
