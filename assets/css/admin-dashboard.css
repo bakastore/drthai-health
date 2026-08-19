@@ -1,0 +1,219 @@
+/**
+ * Operational workspace scoped to the native Dashboard home.
+ */
+
+body.index-php #drthai_health_operational_dashboard .inside {
+	margin: 0;
+	padding: 0;
+}
+
+body.index-php #dashboard-widgets .postbox-container {
+	float: none;
+	width: 100% !important;
+}
+
+body.index-php #dashboard-widgets .empty-container {
+	display: none !important;
+}
+
+body.index-php #dashboard-widgets .postbox {
+	margin-bottom: 20px;
+}
+
+body.index-php #drthai_health_operational_dashboard {
+	border-color: #c9d7d0;
+}
+
+body.index-php #drthai_health_operational_dashboard .hndle {
+	font-size: 19px;
+	font-weight: 600;
+	line-height: 1.35;
+}
+
+body.index-php .drthai-dashboard {
+	padding: 24px;
+	color: #1d2327;
+}
+
+body.index-php .drthai-dashboard__subtitle {
+	margin: 0 0 18px;
+	color: #646970;
+	font-size: 13px;
+}
+
+body.index-php .drthai-dashboard__kpis {
+	display: grid;
+	grid-template-columns: repeat(4, minmax(0, 1fr));
+	gap: 16px;
+}
+
+body.index-php .drthai-dashboard__kpi {
+	position: relative;
+	min-width: 0;
+	padding: 18px;
+	border: 1px solid #d6ddd9;
+	border-radius: 6px;
+	background: #fff;
+}
+
+body.index-php .drthai-dashboard__kpi--attention {
+	border-left: 4px solid #b58105;
+}
+
+body.index-php .drthai-dashboard__kpi--ok {
+	border-left: 4px solid #3c6e57;
+}
+
+body.index-php .drthai-dashboard__kpi-label,
+body.index-php .drthai-dashboard__kpi-context,
+body.index-php .drthai-dashboard__kpi-status {
+	margin: 0;
+}
+
+body.index-php .drthai-dashboard__kpi-label {
+	font-weight: 600;
+	white-space: nowrap;
+}
+
+body.index-php .drthai-dashboard__kpi-context {
+	color: #646970;
+}
+
+body.index-php .drthai-dashboard__kpi-value {
+	margin: 12px 0 7px;
+	font-size: 30px;
+	font-weight: 700;
+	line-height: 1;
+}
+
+body.index-php .drthai-dashboard__kpi-status {
+	display: flex;
+	align-items: center;
+	gap: 6px;
+	margin-bottom: 12px;
+	color: #50575e;
+}
+
+body.index-php .drthai-dashboard__kpi-status span {
+	width: 8px;
+	height: 8px;
+	border-radius: 50%;
+	background: #8c8f94;
+}
+
+body.index-php .drthai-dashboard__kpi--attention .drthai-dashboard__kpi-status span {
+	background: #b58105;
+}
+
+body.index-php .drthai-dashboard__kpi--ok .drthai-dashboard__kpi-status span {
+	background: #3c6e57;
+}
+
+body.index-php .drthai-dashboard__workspace {
+	display: grid;
+	grid-template-columns: minmax(0, 2fr) minmax(220px, 1fr);
+	gap: 24px;
+	margin-top: 24px;
+	padding-top: 20px;
+	border-top: 1px solid #dcdcde;
+}
+
+body.index-php .drthai-dashboard__workspace h3 {
+	margin: 0 0 12px;
+	font-size: 14px;
+	letter-spacing: .04em;
+	text-transform: uppercase;
+}
+
+body.index-php .drthai-dashboard__queue,
+body.index-php .drthai-dashboard__actions {
+	margin: 0;
+}
+
+body.index-php .drthai-dashboard__queue li {
+	margin: 0;
+	padding: 10px 0;
+	border-bottom: 1px solid #f0f0f1;
+}
+
+body.index-php .drthai-dashboard__queue li > a,
+body.index-php .drthai-dashboard__queue li > span:not(.screen-reader-text) {
+	display: block;
+}
+
+body.index-php .drthai-dashboard__queue li > a {
+	font-weight: 600;
+}
+
+body.index-php .drthai-dashboard__queue li > span:not(.screen-reader-text) {
+	margin-top: 2px;
+	color: #646970;
+}
+
+body.index-php .drthai-dashboard__actions {
+	display: grid;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+	gap: 10px;
+}
+
+body.index-php .drthai-dashboard__actions a {
+	display: block;
+	padding: 9px 11px;
+	border: 1px solid #c3c4c7;
+	border-radius: 4px;
+	background: #f6f7f7;
+	font-weight: 500;
+	text-decoration: none;
+}
+
+body.index-php .drthai-dashboard__actions a:hover {
+	border-color: #3c6e57;
+	background: #fff;
+}
+
+body.index-php .drthai-dashboard a:focus-visible {
+	outline: 2px solid #2271b1;
+	outline-offset: 2px;
+	box-shadow: none;
+}
+
+body.index-php .drthai-dashboard__empty {
+	padding: 14px 16px;
+	border-left: 4px solid #3c6e57;
+	background: #f6f7f7;
+}
+
+body.index-php .drthai-dashboard__empty p {
+	margin: 0 0 4px;
+}
+
+@media screen and (max-width: 1100px) {
+	body.index-php .drthai-dashboard__kpis {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+	}
+}
+
+@media screen and (max-width: 782px) {
+	body.index-php .drthai-dashboard {
+		padding: 18px;
+	}
+
+	body.index-php .drthai-dashboard__workspace {
+		grid-template-columns: 1fr;
+	}
+}
+
+@media screen and (max-width: 480px) {
+	body.index-php .drthai-dashboard__kpis {
+		grid-template-columns: 1fr;
+	}
+
+	body.index-php .drthai-dashboard__kpi,
+	body.index-php .drthai-dashboard__actions a {
+		padding: 14px;
+	}
+
+	body.index-php .drthai-dashboard__kpi-label {
+		white-space: normal;
+	}
+}
