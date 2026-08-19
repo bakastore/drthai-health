@@ -1,3 +1,22 @@
+DrThai Health 1.0.4 — 17/08/2026
+================================
+
+- Nâng cấp trải nghiệm trang Đặt lịch và Liên hệ.
+- Cải thiện bố cục, phân cấp nội dung và khả năng hiển thị trên thiết bị di động.
+- Làm rõ đây là biểu mẫu yêu cầu liên hệ/đặt lịch, chưa phải lịch hẹn đã được xác nhận.
+- Bổ sung hướng dẫn không gửi hồ sơ bệnh án, ảnh nội soi hoặc dữ liệu sức khỏe nhạy cảm qua biểu mẫu công khai.
+- Bổ sung phương thức liên hệ trực tiếp và cải thiện Call to Action.
+- Không thay đổi cấu trúc Database hoặc dữ liệu WordPress.
+
+DrThai Health 1.0.3 — 03/08/2026
+================================
+
+- Nâng cấp biểu mẫu yêu cầu đặt lịch với trường dịch vụ và khung giờ được kiểm soát bằng whitelist.
+- Bổ sung kiểm tra, chuẩn hóa và lưu các trường thông tin của yêu cầu đặt lịch.
+- Cập nhật giao diện quản trị cho các yêu cầu đặt lịch.
+- Thay biểu mẫu trong Hero bằng ảnh bác sĩ được tối ưu để tập trung Call to Action.
+- Bổ sung ảnh `hero-doctor.webp` và điều chỉnh giao diện Hero tương ứng.
+
 DrThai Health 1.0.2 — 03/08/2026
 ================================
 
