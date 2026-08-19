@@ -163,9 +163,12 @@ try {
 	add_meta_box( 'dashboard_site_health', 'Site Health', '__return_empty_string', 'dashboard', 'normal', 'core' );
 	add_meta_box( 'dashboard_quick_press', 'Quick Draft', '__return_empty_string', 'dashboard', 'side', 'core' );
 	add_meta_box( 'dashboard_primary', 'Events and News', '__return_empty_string', 'dashboard', 'side', 'core' );
+	add_meta_box( 'wpseo-dashboard-overview', 'Yoast SEO Posts Overview', '__return_empty_string', 'dashboard', 'normal', 'core' );
+	add_meta_box( 'wpseo-wincher-dashboard-overview', 'Yoast SEO / Wincher: Top Keyphrases', '__return_empty_string', 'dashboard', 'normal', 'core' );
 	drthai_health_setup_operational_dashboard();
 	drthai_b2a_assert( false === $wp_meta_boxes['dashboard']['normal']['core']['dashboard_right_now'] && false === $wp_meta_boxes['dashboard']['side']['core']['dashboard_primary'], 'At a Glance and WordPress Events/News are removed' );
 	drthai_b2a_assert( false === $wp_meta_boxes['dashboard']['normal']['core']['dashboard_activity'] && false === $wp_meta_boxes['dashboard']['side']['core']['dashboard_quick_press'], 'Activity and Quick Draft are removed from the default Dashboard' );
+	drthai_b2a_assert( false === $wp_meta_boxes['dashboard']['normal']['core']['wpseo-dashboard-overview'] && false === $wp_meta_boxes['dashboard']['normal']['core']['wpseo-wincher-dashboard-overview'], 'Yoast overview widgets are removed without disabling Yoast SEO' );
 	drthai_b2a_assert( isset( $wp_meta_boxes['dashboard']['normal']['core']['dashboard_site_health'] ), 'Site Health is retained below the operational widget' );
 	drthai_b2a_assert( isset( $wp_meta_boxes['dashboard']['normal']['high']['drthai_health_operational_dashboard'] ), 'operational widget is placed first in the native Dashboard' );
 	drthai_b2a_assert( 'Tổng quan vận hành' === $wp_meta_boxes['dashboard']['normal']['high']['drthai_health_operational_dashboard']['title'], 'operational widget has one clear native title' );

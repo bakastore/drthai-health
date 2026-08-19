@@ -328,6 +328,8 @@ function drthai_health_setup_operational_dashboard() {
 	remove_meta_box( 'dashboard_activity', 'dashboard', 'normal' );
 	remove_meta_box( 'dashboard_quick_press', 'dashboard', 'side' );
 	remove_meta_box( 'dashboard_primary', 'dashboard', 'side' );
+	remove_meta_box( 'wpseo-dashboard-overview', 'dashboard', 'normal' );
+	remove_meta_box( 'wpseo-wincher-dashboard-overview', 'dashboard', 'normal' );
 	wp_add_dashboard_widget( 'drthai_health_operational_dashboard', __( 'Tổng quan vận hành', 'drthai-health' ), 'drthai_health_render_operational_dashboard' );
 
 	if ( isset( $wp_meta_boxes['dashboard']['normal']['core']['drthai_health_operational_dashboard'] ) ) {
