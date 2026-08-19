@@ -229,13 +229,22 @@ UI work must not block Content Operations.
 
 UI-UX 2.0 and Development Acceptance 2.0 passed and were accepted by the Owner.
 
+Development 1.2.1 completion record:
+
+- B1 Editorial Admin Compact View: PASS / OWNER ACCEPTED
+- B2a Operational Dashboard: PASS / OWNER ACCEPTED
+- B2b Environment Context: PASS / OWNER ACCEPTED
+- B3 Design Token Unification: PASS / OWNER ACCEPTED
+- Final Development Readiness: PASS
+- Owner Final 1.2.1 Acceptance: PENDING
+
 ---
 
 ## 6. Phase 5 — Production Preparation
 
 Status:
 
-NEXT — OWNER AUTHORIZATION REQUIRED
+NEXT AFTER OWNER FINAL 1.2.1 ACCEPTANCE — OWNER AUTHORIZATION REQUIRED
 
 Begin only after the Owner considers Development complete and stable.
 
@@ -311,7 +320,7 @@ Production Go-Live requires:
 
 Current priority order:
 
-Development 1.2 Owner Closeout
+Owner Final 1.2.1 Acceptance
 → Owner-approved Production Preparation
 → Controlled Production Deployment
 → Backup / Restore / Monitoring / Security
