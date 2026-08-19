@@ -7,8 +7,26 @@ body.index-php #drthai_health_operational_dashboard .inside {
 	padding: 0;
 }
 
-body.index-php #dashboard-widgets #postbox-container-1 {
-	width: 100%;
+body.index-php #dashboard-widgets .postbox-container {
+	float: none;
+	width: 100% !important;
+}
+
+body.index-php #dashboard-widgets .empty-container {
+	display: none !important;
+}
+
+body.index-php #dashboard-widgets .postbox {
+	margin-bottom: 20px;
+}
+
+body.index-php #drthai_health_operational_dashboard {
+	border-color: #c9d7d0;
+}
+
+body.index-php #drthai_health_operational_dashboard .hndle {
+	font-size: 17px;
+	font-weight: 600;
 }
 
 body.index-php .drthai-dashboard {
@@ -16,31 +34,24 @@ body.index-php .drthai-dashboard {
 	color: #1d2327;
 }
 
-body.index-php .drthai-dashboard__eyebrow {
-	margin: 0 0 4px;
-	color: #3c6e57;
-	font-size: 12px;
-	font-weight: 700;
-	letter-spacing: .08em;
-}
-
-body.index-php .drthai-dashboard h2 {
-	margin: 0 0 20px;
-	font-size: 22px;
+body.index-php .drthai-dashboard__subtitle {
+	margin: 0 0 18px;
+	color: #646970;
+	font-size: 13px;
 }
 
 body.index-php .drthai-dashboard__kpis {
 	display: grid;
 	grid-template-columns: repeat(4, minmax(0, 1fr));
-	gap: 12px;
+	gap: 16px;
 }
 
 body.index-php .drthai-dashboard__kpi {
 	position: relative;
 	min-width: 0;
-	padding: 16px;
-	border: 1px solid #dcdcde;
-	border-radius: 4px;
+	padding: 18px;
+	border: 1px solid #d6ddd9;
+	border-radius: 6px;
 	background: #fff;
 }
 
@@ -60,6 +71,7 @@ body.index-php .drthai-dashboard__kpi-status {
 
 body.index-php .drthai-dashboard__kpi-label {
 	font-weight: 600;
+	white-space: nowrap;
 }
 
 body.index-php .drthai-dashboard__kpi-context {
@@ -67,7 +79,7 @@ body.index-php .drthai-dashboard__kpi-context {
 }
 
 body.index-php .drthai-dashboard__kpi-value {
-	margin: 10px 0 6px;
+	margin: 12px 0 7px;
 	font-size: 30px;
 	font-weight: 700;
 	line-height: 1;
@@ -139,16 +151,23 @@ body.index-php .drthai-dashboard__queue li > span:not(.screen-reader-text) {
 
 body.index-php .drthai-dashboard__actions {
 	display: grid;
-	gap: 8px;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+	gap: 10px;
 }
 
 body.index-php .drthai-dashboard__actions a {
 	display: block;
-	padding: 10px 12px;
+	padding: 9px 11px;
 	border: 1px solid #c3c4c7;
-	border-radius: 3px;
-	background: #fff;
+	border-radius: 4px;
+	background: #f6f7f7;
+	font-weight: 500;
 	text-decoration: none;
+}
+
+body.index-php .drthai-dashboard__actions a:hover {
+	border-color: #3c6e57;
+	background: #fff;
 }
 
 body.index-php .drthai-dashboard a:focus-visible {
@@ -191,5 +210,9 @@ body.index-php .drthai-dashboard__empty p {
 	body.index-php .drthai-dashboard__kpi,
 	body.index-php .drthai-dashboard__actions a {
 		padding: 14px;
+	}
+
+	body.index-php .drthai-dashboard__kpi-label {
+		white-space: normal;
 	}
 }

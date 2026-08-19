@@ -271,8 +271,7 @@ function drthai_health_render_operational_dashboard() {
 	$cards[] = array( 'label' => __( 'Bản nháp', 'drthai-health' ), 'context' => '', 'value' => $metrics['drafts'], 'state' => 'neutral', 'status' => __( 'Thông tin', 'drthai-health' ), 'link' => admin_url( 'edit.php?post_status=draft&post_type=post' ), 'action' => __( 'Xem bản nháp', 'drthai-health' ) );
 	?>
 	<div class="drthai-dashboard">
-		<p class="drthai-dashboard__eyebrow"><?php esc_html_e( 'DRTHAI HEALTH', 'drthai-health' ); ?></p>
-		<h2><?php esc_html_e( 'Tổng quan vận hành', 'drthai-health' ); ?></h2>
+		<p class="drthai-dashboard__subtitle"><?php esc_html_e( 'DrThai Health', 'drthai-health' ); ?></p>
 		<div class="drthai-dashboard__kpis">
 			<?php foreach ( $cards as $card ) : ?>
 				<section class="drthai-dashboard__kpi drthai-dashboard__kpi--<?php echo esc_attr( $card['state'] ); ?>">
@@ -320,14 +319,16 @@ function drthai_health_render_operational_dashboard() {
 }
 
 /**
- * Register the operational widget and remove two low-value defaults.
+ * Register the operational widget and remove low-value default clutter.
  */
 function drthai_health_setup_operational_dashboard() {
 	global $wp_meta_boxes;
 
 	remove_meta_box( 'dashboard_right_now', 'dashboard', 'normal' );
+	remove_meta_box( 'dashboard_activity', 'dashboard', 'normal' );
+	remove_meta_box( 'dashboard_quick_press', 'dashboard', 'side' );
 	remove_meta_box( 'dashboard_primary', 'dashboard', 'side' );
-	wp_add_dashboard_widget( 'drthai_health_operational_dashboard', __( 'DRTHAI HEALTH', 'drthai-health' ), 'drthai_health_render_operational_dashboard' );
+	wp_add_dashboard_widget( 'drthai_health_operational_dashboard', __( 'Tổng quan vận hành', 'drthai-health' ), 'drthai_health_render_operational_dashboard' );
 
 	if ( isset( $wp_meta_boxes['dashboard']['normal']['core']['drthai_health_operational_dashboard'] ) ) {
 		$widget = $wp_meta_boxes['dashboard']['normal']['core']['drthai_health_operational_dashboard'];

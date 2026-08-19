@@ -159,13 +159,16 @@ try {
 	$wp_meta_boxes = array();
 	set_current_screen( 'dashboard' );
 	add_meta_box( 'dashboard_right_now', 'At a Glance', '__return_empty_string', 'dashboard', 'normal', 'core' );
+	add_meta_box( 'dashboard_activity', 'Activity', '__return_empty_string', 'dashboard', 'normal', 'core' );
 	add_meta_box( 'dashboard_site_health', 'Site Health', '__return_empty_string', 'dashboard', 'normal', 'core' );
 	add_meta_box( 'dashboard_quick_press', 'Quick Draft', '__return_empty_string', 'dashboard', 'side', 'core' );
 	add_meta_box( 'dashboard_primary', 'Events and News', '__return_empty_string', 'dashboard', 'side', 'core' );
 	drthai_health_setup_operational_dashboard();
 	drthai_b2a_assert( false === $wp_meta_boxes['dashboard']['normal']['core']['dashboard_right_now'] && false === $wp_meta_boxes['dashboard']['side']['core']['dashboard_primary'], 'At a Glance and WordPress Events/News are removed' );
-	drthai_b2a_assert( isset( $wp_meta_boxes['dashboard']['normal']['core']['dashboard_site_health'] ) && isset( $wp_meta_boxes['dashboard']['side']['core']['dashboard_quick_press'] ), 'Site Health and Quick Draft are preserved' );
+	drthai_b2a_assert( false === $wp_meta_boxes['dashboard']['normal']['core']['dashboard_activity'] && false === $wp_meta_boxes['dashboard']['side']['core']['dashboard_quick_press'], 'Activity and Quick Draft are removed from the default Dashboard' );
+	drthai_b2a_assert( isset( $wp_meta_boxes['dashboard']['normal']['core']['dashboard_site_health'] ), 'Site Health is retained below the operational widget' );
 	drthai_b2a_assert( isset( $wp_meta_boxes['dashboard']['normal']['high']['drthai_health_operational_dashboard'] ), 'operational widget is placed first in the native Dashboard' );
+	drthai_b2a_assert( 'Tổng quan vận hành' === $wp_meta_boxes['dashboard']['normal']['high']['drthai_health_operational_dashboard']['title'], 'operational widget has one clear native title' );
 } catch ( Throwable $error ) {
 	fwrite( STDERR, $error->getMessage() . "\n" );
 	$exit_code = 1;
