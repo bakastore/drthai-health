@@ -13,6 +13,7 @@ require_once __DIR__ . '/inc/theme-setup.php';
 require_once __DIR__ . '/inc/editorial-workflow.php';
 require_once __DIR__ . '/inc/content-lifecycle.php';
 require_once __DIR__ . '/inc/editorial-admin.php';
+require_once __DIR__ . '/inc/admin-dashboard.php';
 
 /**
  * Register private callback requests in the dashboard.
