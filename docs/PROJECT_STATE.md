@@ -3,9 +3,9 @@
 Status: CODEX-MAINTAINABLE
 Purpose: Current factual state of the project
 
-Last updated: 2026-08-18
+Last updated: 2026-08-19
 Current development version: 1.2.0
-Current phase: UI-UX 2.0 — Public Experience Polish
+Current phase: Development Acceptance 2.0 — External Review
 Production deployment: DEFERRED
 
 ---
@@ -39,7 +39,7 @@ Repository:
 
 Current branch:
 
-feature/ui-ux-2.0-public-polish
+gate/development-acceptance-2.0
 
 Last confirmed Local Development Release commit:
 
@@ -446,7 +446,23 @@ Durable public experience rules are documented in `docs/PUBLIC_EXPERIENCE_STANDA
 
 ---
 
-## 15. Production Status
+## 15. Development Acceptance 2.0
+
+Status:
+
+PASS / EXTERNAL REVIEW REQUIRED
+
+Verified on 2026-08-19:
+
+- accepted runtime candidate: `fe3a670734093982afc87ca9393002f6d5e58160`;
+- accepted lineage, C1–C5 regression, Content Engine routing, Booking boundary, UI/UX smoke, accessibility sanity, controlled Local restart, data persistence, security sanity, Packaging Policy, Packaging Validator, and zero-unclassified gates passed;
+- committed Gate evidence is documented in `docs/DEVELOPMENT_ACCEPTANCE_2.0.md`;
+- external review and Owner Development Approval remain pending;
+- Production Preparation is NOT AUTHORIZED and Production remains DEFERRED.
+
+---
+
+## 16. Production Status
 
 Production work is currently DEFERRED.
 
@@ -465,17 +481,17 @@ No Production mutation without explicit Owner approval.
 
 ---
 
-## 16. Next Mission
+## 17. Next Mission
 
 Next Mission:
 
-OWNER_UI_UX_2_0_ACCEPTANCE
+EXTERNAL_REVIEW
 
-UI-UX 2.0 implementation is complete locally; Owner acceptance is the next action.
+Submit Development Acceptance 2.0 evidence for mandatory external review. Do not begin Production Preparation.
 
 ---
 
-## 17. Maintenance Rules
+## 18. Maintenance Rules
 
 This file represents factual current project state.
 
