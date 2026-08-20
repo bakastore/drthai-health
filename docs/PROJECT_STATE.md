@@ -4,9 +4,9 @@ Status: CODEX-MAINTAINABLE
 Purpose: Current factual state of the project
 
 Last updated: 2026-08-19
-Current development version: 1.2.0
-Current phase: DEVELOPMENT 1.2 — OWNER ACCEPTED / CLOSED
-Production deployment: DEFERRED
+Current development version: 1.2.1
+Current phase: DEVELOPMENT 1.2.1 — CLOSED / OWNER ACCEPTED
+Production deployment: DEFERRED / NOT AUTHORIZED
 
 ---
 
@@ -474,6 +474,24 @@ Verified on 2026-08-19:
 - Owner Development Approval is complete;
 - Production Preparation is NOT AUTHORIZED and Production remains DEFERRED.
 
+### Development 1.2.1 Final Readiness
+
+Status:
+
+CLOSED / OWNER ACCEPTED
+
+Verified on 2026-08-19:
+
+- B1 Editorial Admin Compact View: PASS / OWNER ACCEPTED.
+- B2a Operational Dashboard: PASS / OWNER ACCEPTED.
+- B2b Environment Context: PASS / OWNER ACCEPTED.
+- B3 Design Token Unification: PASS / OWNER ACCEPTED.
+- The theme development version is normalized to 1.2.1.
+- Final Development Readiness: PASS.
+- Owner Final 1.2.1 Acceptance: OWNER ACCEPTED / COMPLETE.
+- Development 1.2.1: CLOSED / OWNER ACCEPTED.
+- Production remains DEFERRED / NOT AUTHORIZED.
+
 ---
 
 ## 16. Production Status
@@ -497,11 +515,11 @@ No Production mutation without explicit Owner approval.
 
 ## 17. Next Mission
 
-Next Mission:
+Next phase:
 
-PRODUCTION_PREPARATION
+PRODUCTION PREPARATION — OWNER AUTHORIZATION REQUIRED
 
-This mission is next in the roadmap but is NOT AUTHORIZED until the Owner opens a separate Production Preparation mission. Production remains DEFERRED.
+Production Preparation remains NOT AUTHORIZED until the Owner opens a separate approved mission. Production remains DEFERRED.
 
 ---
 
